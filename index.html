@@ -1,97 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <meta name="description"
-          content="Inshal Mudassir — Developer, Data Science and Machine Learning enthusiast. Explore my projects, skills and experience.">
+    <meta
+        name="description"
+        content="Inshal Mudassir — Developer, Data Science Enthusiast and Computer Science Student."
+    >
 
-    <meta name="author" content="Inshal Mudassir">
+    <meta
+        name="author"
+        content="Inshal Mudassir"
+    >
 
-    <title>Inshal Mudassir | Developer & Data Science</title>
+    <title>Inshal Mudassir | Developer & Data Science Enthusiast</title>
 
-    <!-- Google Fonts -->
+    <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-          rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
 
-    <!-- Main CSS -->
+    <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
-
-    <!-- Animation CSS -->
     <link rel="stylesheet" href="css/animations.css">
-
-    <!-- Responsive CSS -->
     <link rel="stylesheet" href="css/responsive.css">
 </head>
 
+
 <body>
 
-    <!-- =========================
-         HEADER / NAVBAR
-    ========================== -->
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
 
-    <header class="header" id="header">
+    <header class="header">
 
         <nav class="navbar container">
 
-            <!-- Logo -->
             <a href="index.html" class="logo">
                 Inshal<span>.</span>
             </a>
 
-            <!-- Navigation -->
-            <ul class="nav-menu">
 
-                <li>
-                    <a href="index.html" class="nav-link active">
-                        Home
-                    </a>
-                </li>
+            <!-- Desktop / Mobile Navigation -->
 
-                <li>
-                    <a href="about.html" class="nav-link">
-                        About
-                    </a>
-                </li>
+            <div class="nav-menu">
 
-                <li>
-                    <a href="skills.html" class="nav-link">
-                        Skills
-                    </a>
-                </li>
+                <a href="index.html" class="nav-link active">
+                    Home
+                </a>
 
-                <li>
-                    <a href="projects.html" class="nav-link">
-                        Projects
-                    </a>
-                </li>
+                <a href="about.html" class="nav-link">
+                    About
+                </a>
 
-                <li>
-                    <a href="experience.html" class="nav-link">
-                        Experience
-                    </a>
-                </li>
+                <a href="skills.html" class="nav-link">
+                    Skills
+                </a>
 
-                <li>
-                    <a href="contact.html" class="nav-link">
-                        Contact
-                    </a>
-                </li>
+                <a href="projects.html" class="nav-link">
+                    Projects
+                </a>
 
-            </ul>
+                <a href="experience.html" class="nav-link">
+                    Experience
+                </a>
 
-            <!-- Navbar CTA -->
-            <a href="contact.html" class="nav-button">
-                Let's Talk
-            </a>
+                <a href="contact.html" class="nav-button">
+                    Let's Talk
+                </a>
 
-            <!-- Mobile Menu Button -->
-            <button class="menu-toggle" aria-label="Open navigation menu">
+            </div>
+
+
+            <!-- Mobile Menu -->
+
+            <button
+                class="menu-toggle"
+                type="button"
+                aria-label="Open navigation menu"
+                aria-expanded="false"
+            >
                 <span></span>
                 <span></span>
                 <span></span>
@@ -102,77 +101,110 @@
     </header>
 
 
-    <!-- =========================
-         MAIN CONTENT
-    ========================== -->
+
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
 
     <main>
-
-        <!-- =========================
-             HERO SECTION
-        ========================== -->
 
         <section class="hero" id="home">
 
             <div class="container hero-container">
 
+
                 <!-- Hero Content -->
+
                 <div class="hero-content">
 
-                    <p class="hero-greeting">
+                    <div class="hero-label reveal">
+                        <span></span>
                         Hello, I'm
-                    </p>
+                    </div>
 
-                    <h1 class="hero-title">
+
+                    <h1 class="hero-title reveal">
+
                         Inshal
                         <span>Mudassir</span>
+
                     </h1>
 
-                    <h2 class="hero-role">
+
+                    <h2 class="hero-role reveal">
                         Developer & Data Science Enthusiast
                     </h2>
 
-                    <p class="hero-description">
-                        I build modern web experiences, work with data,
-                        and explore machine learning to turn ideas into
-                        practical digital solutions.
+
+                    <p class="hero-description reveal">
+
+                        I build modern web experiences, explore data,
+                        and turn ideas into practical projects using
+                        Python, JavaScript, and emerging machine
+                        learning technologies.
+
                     </p>
 
-                    <!-- Hero Buttons -->
-                    <div class="hero-buttons">
 
-                        <a href="projects.html" class="btn btn-primary">
+                    <!-- Hero Buttons -->
+
+                    <div class="hero-buttons reveal">
+
+                        <a
+                            href="projects.html"
+                            class="btn btn-primary"
+                        >
                             View My Work
-                            <span>→</span>
+
+                            <span class="btn-arrow">
+                                →
+                            </span>
                         </a>
 
-                        <a href="contact.html" class="btn btn-secondary">
+
+                        <a
+                            href="contact.html"
+                            class="btn btn-secondary"
+                        >
                             Let's Connect
                         </a>
 
                     </div>
 
+
                     <!-- Social Links -->
-                    <div class="social-links">
 
-                        <a href="#" target="_blank" rel="noopener noreferrer"
-                           aria-label="GitHub">
-                            GitHub
+                    <div class="hero-socials reveal">
+
+                        <a
+                            href="#"
+                            target="_blank"
+                            aria-label="GitHub"
+                        >
+                            GH
                         </a>
 
-                        <a href="#" target="_blank" rel="noopener noreferrer"
-                           aria-label="LinkedIn">
-                            LinkedIn
+                        <a
+                            href="#"
+                            target="_blank"
+                            aria-label="LinkedIn"
+                        >
+                            LI
                         </a>
 
-                        <a href="#" target="_blank" rel="noopener noreferrer"
-                           aria-label="Instagram">
-                            Instagram
+                        <a
+                            href="#"
+                            target="_blank"
+                            aria-label="Instagram"
+                        >
+                            IG
                         </a>
 
-                        <a href="#" target="_blank" rel="noopener noreferrer"
-                           aria-label="WhatsApp">
-                            WhatsApp
+                        <a
+                            href="#"
+                            aria-label="WhatsApp"
+                        >
+                            WA
                         </a>
 
                     </div>
@@ -180,98 +212,103 @@
                 </div>
 
 
-                <!-- Hero Visual -->
-                <div class="hero-visual">
 
-                    <div class="hero-card">
+                <!-- =================================================
+                     HERO VISUAL
+                     ================================================= -->
 
-                        <div class="code-window">
+                <div class="hero-visual reveal-scale">
 
-                            <div class="code-header">
 
-                                <div class="code-dots">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </div>
+                    <!-- Code Window -->
 
-                                <span>developer.js</span>
+                    <div class="code-window">
 
-                            </div>
+                        <div class="code-header">
 
-                            <div class="code-content">
+                            <div class="code-dots">
 
-                                <p>
-                                    <span class="code-keyword">const</span>
-                                    developer = {
-                                </p>
-
-                                <p class="code-indent">
-                                    name:
-                                    <span class="code-string">
-                                        "Inshal"
-                                    </span>,
-                                </p>
-
-                                <p class="code-indent">
-                                    role:
-                                    <span class="code-string">
-                                        "Developer"
-                                    </span>,
-                                </p>
-
-                                <p class="code-indent">
-                                    skills: [
-                                </p>
-
-                                <p class="code-indent-2">
-                                    <span class="code-string">
-                                        "HTML"
-                                    </span>,
-                                    <span class="code-string">
-                                        "CSS"
-                                    </span>,
-                                </p>
-
-                                <p class="code-indent-2">
-                                    <span class="code-string">
-                                        "JavaScript"
-                                    </span>,
-                                    <span class="code-string">
-                                        "Python"
-                                    </span>,
-                                </p>
-
-                                <p class="code-indent-2">
-                                    <span class="code-string">
-                                        "Data Science"
-                                    </span>
-                                </p>
-
-                                <p class="code-indent">
-                                    ]
-                                </p>
-
-                                <p>
-                                    };
-                                </p>
+                                <span></span>
+                                <span></span>
+                                <span></span>
 
                             </div>
+
+                            <span class="code-title">
+                                portfolio.py
+                            </span>
+
+                        </div>
+
+
+                        <div class="code-body">
+
+<pre><code><span class="code-keyword">class</span> <span class="code-name">Inshal</span>:
+
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(self):
+
+        self.name =
+            <span class="code-string">"Inshal Mudassir"</span>
+
+        self.role =
+            <span class="code-string">"Developer"</span>
+
+        self.skills = [
+            <span class="code-string">"HTML"</span>,
+            <span class="code-string">"CSS"</span>,
+            <span class="code-string">"JavaScript"</span>,
+            <span class="code-string">"Python"</span>,
+            <span class="code-string">"Data Science"</span>
+        ]
+
+        self.goal =
+            <span class="code-string">"Keep Building"</span>
+
+<span class="code-comment"># turning ideas into reality</span></code></pre>
 
                         </div>
 
                     </div>
 
-                    <!-- Floating Elements -->
 
-                    <div class="floating-card floating-card-one">
-                        <strong>01</strong>
-                        <span>Developer</span>
+
+                    <!-- Floating Cards -->
+
+                    <div class="hero-card hero-card-one">
+
+                        <div class="hero-card-number">
+                            01
+                        </div>
+
+                        <div>
+                            <strong>
+                                Developer
+                            </strong>
+
+                            <small>
+                                Building for web
+                            </small>
+                        </div>
+
                     </div>
 
-                    <div class="floating-card floating-card-two">
-                        <strong>02</strong>
-                        <span>Data Science</span>
+
+                    <div class="hero-card hero-card-two">
+
+                        <div class="hero-card-number">
+                            02
+                        </div>
+
+                        <div>
+                            <strong>
+                                Data Science
+                            </strong>
+
+                            <small>
+                                Exploring insights
+                            </small>
+                        </div>
+
                     </div>
 
                 </div>
@@ -281,58 +318,121 @@
         </section>
 
 
-        <!-- =========================
-             INTRODUCTION
-        ========================== -->
 
-        <section class="intro section">
+        <!-- =====================================================
+             ABOUT INTRO
+             ===================================================== -->
 
-            <div class="container intro-container">
-
-                <div class="section-label">
-                    <span>01</span>
-                    About My Work
-                </div>
-
-                <h2 class="section-title">
-                    Turning ideas into
-                    <span>digital experiences.</span>
-                </h2>
-
-                <p class="section-description">
-                    I'm passionate about building clean interfaces,
-                    exploring data, and continuously learning modern
-                    technologies. My goal is to combine development,
-                    data and machine learning to create useful products.
-                </p>
-
-                <a href="about.html" class="text-link">
-                    More about me →
-                </a>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             SKILLS PREVIEW
-        ========================== -->
-
-        <section class="skills-preview section">
+        <section class="section intro-section">
 
             <div class="container">
 
-                <div class="section-heading">
+                <div class="section-heading reveal">
 
-                    <div class="section-label">
-                        <span>02</span>
-                        Technologies
-                    </div>
+                    <span class="section-label">
+                        ABOUT MY WORK
+                    </span>
 
                     <h2 class="section-title">
-                        Tools I
-                        <span>work with.</span>
+                        I like turning
+                        <span class="gradient-text">
+                            ideas into reality.
+                        </span>
+                    </h2>
+
+                    <p class="section-description">
+
+                        From designing responsive interfaces to
+                        analyzing datasets, I enjoy learning by
+                        building real things.
+
+                    </p>
+
+                </div>
+
+
+                <div class="intro-grid">
+
+                    <div class="intro-card reveal">
+
+                        <span class="intro-number">
+                            01
+                        </span>
+
+                        <h3>
+                            Build
+                        </h3>
+
+                        <p>
+                            Creating clean, responsive and
+                            user-friendly web experiences.
+                        </p>
+
+                    </div>
+
+
+                    <div class="intro-card reveal">
+
+                        <span class="intro-number">
+                            02
+                        </span>
+
+                        <h3>
+                            Analyze
+                        </h3>
+
+                        <p>
+                            Working with data to discover patterns,
+                            insights and useful information.
+                        </p>
+
+                    </div>
+
+
+                    <div class="intro-card reveal">
+
+                        <span class="intro-number">
+                            03
+                        </span>
+
+                        <h3>
+                            Learn
+                        </h3>
+
+                        <p>
+                            Continuously improving my skills through
+                            practical projects and experimentation.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================================
+             SKILLS PREVIEW
+             ===================================================== -->
+
+        <section class="section skills-preview">
+
+            <div class="container">
+
+                <div class="section-heading reveal">
+
+                    <span class="section-label">
+                        WHAT I WORK WITH
+                    </span>
+
+                    <h2 class="section-title">
+                        My technical
+                        <span class="gradient-text">
+                            toolkit.
+                        </span>
                     </h2>
 
                 </div>
@@ -340,48 +440,140 @@
 
                 <div class="skills-grid">
 
-                    <div class="skill-card">
-                        <div class="skill-number">01</div>
-                        <h3>Frontend</h3>
-                        <p>
-                            HTML, CSS, JavaScript and Tailwind CSS
-                            for modern responsive interfaces.
-                        </p>
-                    </div>
 
-                    <div class="skill-card">
-                        <div class="skill-number">02</div>
-                        <h3>Python</h3>
-                        <p>
-                            Python for programming, automation,
-                            data analysis and machine learning.
-                        </p>
-                    </div>
+                    <article class="skill-card reveal">
 
-                    <div class="skill-card">
-                        <div class="skill-number">03</div>
-                        <h3>Data Science</h3>
-                        <p>
-                            NumPy, Pandas, Matplotlib and Seaborn
-                            for data analysis and visualization.
-                        </p>
-                    </div>
+                        <div class="skill-card-icon">
+                            &lt;/&gt;
+                        </div>
 
-                    <div class="skill-card">
-                        <div class="skill-number">04</div>
-                        <h3>Database & Tools</h3>
+                        <span class="skill-card-number">
+                            01
+                        </span>
+
+                        <h3>
+                            Frontend
+                        </h3>
+
                         <p>
-                            MongoDB, Git and GitHub for data storage,
-                            version control and project management.
+                            Building responsive and modern
+                            interfaces for the web.
                         </p>
-                    </div>
+
+                        <div class="skill-tags">
+
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                            <span>Tailwind</span>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="skill-card reveal">
+
+                        <div class="skill-card-icon">
+                            Py
+                        </div>
+
+                        <span class="skill-card-number">
+                            02
+                        </span>
+
+                        <h3>
+                            Python
+                        </h3>
+
+                        <p>
+                            Using Python for automation,
+                            analysis and practical projects.
+                        </p>
+
+                        <div class="skill-tags">
+
+                            <span>Python</span>
+                            <span>NumPy</span>
+                            <span>Pandas</span>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="skill-card reveal">
+
+                        <div class="skill-card-icon">
+                            DS
+                        </div>
+
+                        <span class="skill-card-number">
+                            03
+                        </span>
+
+                        <h3>
+                            Data Science
+                        </h3>
+
+                        <p>
+                            Exploring datasets and creating
+                            meaningful visualizations.
+                        </p>
+
+                        <div class="skill-tags">
+
+                            <span>Matplotlib</span>
+                            <span>Seaborn</span>
+                            <span>Pandas</span>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="skill-card reveal">
+
+                        <div class="skill-card-icon">
+                            DB
+                        </div>
+
+                        <span class="skill-card-number">
+                            04
+                        </span>
+
+                        <h3>
+                            Database & Tools
+                        </h3>
+
+                        <p>
+                            Managing projects, repositories
+                            and application data.
+                        </p>
+
+                        <div class="skill-tags">
+
+                            <span>MongoDB</span>
+                            <span>Git</span>
+                            <span>GitHub</span>
+
+                        </div>
+
+                    </article>
 
                 </div>
 
-                <div class="center-button">
-                    <a href="skills.html" class="btn btn-secondary">
-                        Explore All Skills →
+
+                <div class="section-action reveal">
+
+                    <a
+                        href="skills.html"
+                        class="btn btn-secondary"
+                    >
+                        Explore All Skills
+                        <span>→</span>
                     </a>
+
                 </div>
 
             </div>
@@ -389,54 +581,85 @@
         </section>
 
 
-        <!-- =========================
-             FEATURED PROJECTS
-        ========================== -->
 
-        <section class="featured-projects section">
+        <!-- =====================================================
+             FEATURED PROJECTS
+             ===================================================== -->
+
+        <section class="section projects-preview">
 
             <div class="container">
 
-                <div class="section-heading">
+                <div class="section-heading reveal">
 
-                    <div class="section-label">
-                        <span>03</span>
-                        Selected Work
-                    </div>
+                    <span class="section-label">
+                        FEATURED WORK
+                    </span>
 
                     <h2 class="section-title">
-                        Projects that
-                        <span>show what I do.</span>
+                        Things I've
+                        <span class="gradient-text">
+                            built.
+                        </span>
                     </h2>
+
+                    <p class="section-description">
+
+                        A selection of projects where I've
+                        experimented, learned and solved
+                        practical problems.
+
+                    </p>
 
                 </div>
 
 
                 <div class="projects-grid">
 
-                    <article class="project-card">
 
-                        <div class="project-image">
-                            <span>Project 01</span>
+                    <!-- Project 1 -->
+
+                    <article class="project-card reveal">
+
+                        <div class="project-image project-data">
+
+                            <div class="project-visual-content">
+
+                                <span>
+                                    DATA
+                                </span>
+
+                                <strong>
+                                    Gold Price
+                                    Analysis
+                                </strong>
+
+                            </div>
+
                         </div>
+
 
                         <div class="project-content">
 
-                            <p class="project-category">
+                            <span class="project-category">
                                 Data Science
-                            </p>
+                            </span>
 
                             <h3>
                                 Gold Price Analysis
                             </h3>
 
                             <p>
-                                Data analysis and visualization project
-                                exploring gold market trends using Python.
+                                An exploratory data analysis project
+                                focused on historical gold prices,
+                                trends, returns and volatility.
                             </p>
 
-                            <a href="projects.html" class="text-link">
-                                View project →
+                            <a
+                                href="projects.html"
+                                class="project-link"
+                            >
+                                View Project →
                             </a>
 
                         </div>
@@ -444,29 +667,49 @@
                     </article>
 
 
-                    <article class="project-card">
 
-                        <div class="project-image">
-                            <span>Project 02</span>
+                    <!-- Project 2 -->
+
+                    <article class="project-card reveal">
+
+                        <div class="project-image project-web">
+
+                            <div class="project-visual-content">
+
+                                <span>
+                                    WEB
+                                </span>
+
+                                <strong>
+                                    Modern Web
+                                </strong>
+
+                            </div>
+
                         </div>
+
 
                         <div class="project-content">
 
-                            <p class="project-category">
+                            <span class="project-category">
                                 Web Development
-                            </p>
+                            </span>
 
                             <h3>
                                 Modern Web Experience
                             </h3>
 
                             <p>
-                                A responsive web project focused on clean
-                                UI, usability and modern frontend development.
+                                A responsive website focused on
+                                modern UI design, clean layouts
+                                and smooth interactions.
                             </p>
 
-                            <a href="projects.html" class="text-link">
-                                View project →
+                            <a
+                                href="projects.html"
+                                class="project-link"
+                            >
+                                View Project →
                             </a>
 
                         </div>
@@ -475,10 +718,17 @@
 
                 </div>
 
-                <div class="center-button">
-                    <a href="projects.html" class="btn btn-primary">
-                        View All Projects →
+
+                <div class="section-action reveal">
+
+                    <a
+                        href="projects.html"
+                        class="btn btn-primary"
+                    >
+                        View All Projects
+                        <span>→</span>
                     </a>
+
                 </div>
 
             </div>
@@ -486,31 +736,68 @@
         </section>
 
 
-        <!-- =========================
+
+        <!-- =====================================================
              CTA
-        ========================== -->
+             ===================================================== -->
 
-        <section class="cta section">
+        <section class="section cta-section">
 
-            <div class="container cta-container">
+            <div class="container">
 
-                <p class="section-label">
-                    Let's work together
-                </p>
+                <div class="cta-container reveal">
 
-                <h2>
-                    Have an idea?
-                    <span>Let's build it.</span>
-                </h2>
+                    <div class="cta-content">
 
-                <p>
-                    I'm always interested in learning, creating and
-                    working on interesting digital projects.
-                </p>
+                        <span class="section-label">
+                            HAVE AN IDEA?
+                        </span>
 
-                <a href="contact.html" class="btn btn-primary">
-                    Start a Conversation →
-                </a>
+                        <h2>
+                            Let's build something
+                            <span>
+                                meaningful.
+                            </span>
+                        </h2>
+
+                        <p>
+                            Whether it's a website, data project,
+                            or something completely new, I'm always
+                            interested in building and learning.
+                        </p>
+
+
+                        <div class="cta-buttons">
+
+                            <a
+                                href="contact.html"
+                                class="btn btn-primary"
+                            >
+                                Start a Conversation
+                                <span>→</span>
+                            </a>
+
+                            <a
+                                href="about.html"
+                                class="btn btn-secondary"
+                            >
+                                More About Me
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="cta-decoration">
+
+                        <span></span>
+                        <span></span>
+                        <span></span>
+
+                    </div>
+
+                </div>
 
             </div>
 
@@ -519,22 +806,23 @@
     </main>
 
 
-    <!-- =========================
+
+    <!-- =====================================================
          FOOTER
-    ========================== -->
+         ===================================================== -->
 
     <footer class="footer">
 
-        <div class="container footer-container">
+        <div class="container footer-content">
 
-            <div class="footer-brand">
+            <div>
 
                 <a href="index.html" class="logo">
                     Inshal<span>.</span>
                 </a>
 
                 <p>
-                    Developer · Data Science · Machine Learning
+                    Developer & Data Science Enthusiast
                 </p>
 
             </div>
@@ -542,39 +830,27 @@
 
             <div class="footer-socials">
 
-                <a href="#" target="_blank"
-                   rel="noopener noreferrer">
+                <a href="#" target="_blank">
                     GitHub
                 </a>
 
-                <a href="#" target="_blank"
-                   rel="noopener noreferrer">
+                <a href="#" target="_blank">
                     LinkedIn
                 </a>
 
-                <a href="#" target="_blank"
-                   rel="noopener noreferrer">
+                <a href="#" target="_blank">
                     Instagram
-                </a>
-
-                <a href="#" target="_blank"
-                   rel="noopener noreferrer">
-                    WhatsApp
                 </a>
 
             </div>
 
-        </div>
 
+            <p class="footer-copy">
 
-        <div class="container footer-bottom">
+                © <span data-year></span>
+                Inshal Mudassir.
+                All rights reserved.
 
-            <p>
-                © <span data-year></span> Inshal Mudassir. All rights reserved.
-            </p>
-
-            <p>
-                Built with HTML · CSS · JavaScript
             </p>
 
         </div>
@@ -582,12 +858,13 @@
     </footer>
 
 
-    <!-- =========================
+    <!-- =====================================================
          JAVASCRIPT
-    ========================== -->
+         ===================================================== -->
 
     <script src="js/main.js"></script>
     <script src="js/animations.js"></script>
 
 </body>
+
 </html>
