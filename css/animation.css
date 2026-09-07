@@ -1,0 +1,736 @@
+/* =========================================================
+   GLOBAL PAGE ANIMATION
+   ========================================================= */
+
+body {
+    animation: pageFadeIn 0.7s ease both;
+}
+
+@keyframes pageFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* =========================================================
+   SCROLL REVEAL
+   ========================================================= */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(35px);
+    transition:
+        opacity 0.75s ease,
+        transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* Direction variations */
+
+.reveal-left {
+    opacity: 0;
+    transform: translateX(-45px);
+    transition:
+        opacity 0.75s ease,
+        transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-right {
+    opacity: 0;
+    transform: translateX(45px);
+    transition:
+        opacity 0.75s ease,
+        transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-scale {
+    opacity: 0;
+    transform: scale(0.92);
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-left.active,
+.reveal-right.active,
+.reveal-scale.active {
+    opacity: 1;
+    transform: none;
+}
+
+
+/* =========================================================
+   HERO ANIMATIONS
+   ========================================================= */
+
+.hero-content {
+    animation: heroContentIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes heroContentIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-content .section-label {
+    animation-delay: 0.05s;
+}
+
+.hero-content h1 {
+    animation: heroTitleIn 0.9s 0.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes heroTitleIn {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+        filter: blur(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+.hero-content .hero-role {
+    animation: heroTextIn 0.8s 0.25s ease both;
+}
+
+.hero-content .hero-description {
+    animation: heroTextIn 0.8s 0.35s ease both;
+}
+
+.hero-buttons {
+    animation: heroTextIn 0.8s 0.45s ease both;
+}
+
+.hero-socials {
+    animation: heroTextIn 0.8s 0.55s ease both;
+}
+
+@keyframes heroTextIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   HERO VISUAL
+   ========================================================= */
+
+.hero-visual {
+    animation:
+        heroVisualIn 1s 0.2s cubic-bezier(0.22, 1, 0.36, 1) both,
+        heroVisualFloat 7s 2s ease-in-out infinite;
+}
+
+@keyframes heroVisualIn {
+    from {
+        opacity: 0;
+        transform: translateX(40px) scale(0.94);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes heroVisualFloat {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+
+/* =========================================================
+   FLOATING CARDS
+   ========================================================= */
+
+.hero-card {
+    animation: floatingCard 5s ease-in-out infinite;
+}
+
+.hero-card:nth-child(2) {
+    animation-delay: -2.2s;
+}
+
+@keyframes floatingCard {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+
+/* =========================================================
+   CODE WINDOW
+   ========================================================= */
+
+.code-window {
+    animation: codeWindowGlow 4s ease-in-out infinite;
+}
+
+@keyframes codeWindowGlow {
+    0%,
+    100% {
+        box-shadow:
+            0 20px 50px rgba(15, 23, 42, 0.12);
+    }
+
+    50% {
+        box-shadow:
+            0 25px 60px rgba(37, 99, 235, 0.16);
+    }
+}
+
+
+/* =========================================================
+   BUTTON ANIMATIONS
+   ========================================================= */
+
+.btn {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+        120deg,
+        transparent 20%,
+        rgba(255, 255, 255, 0.2),
+        transparent 80%
+    );
+    transform: translateX(-120%);
+    transition: transform 0.6s ease;
+}
+
+.btn:hover::before {
+    transform: translateX(120%);
+}
+
+.btn .arrow {
+    display: inline-block;
+    transition: transform 0.25s ease;
+}
+
+.btn:hover .arrow {
+    transform: translateX(5px);
+}
+
+
+/* Ripple created by main.js */
+
+.button-ripple {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    pointer-events: none;
+    background: rgba(255, 255, 255, 0.35);
+    transform: translate(-50%, -50%) scale(0);
+    animation: buttonRipple 0.65s ease-out;
+}
+
+@keyframes buttonRipple {
+    to {
+        transform: translate(-50%, -50%) scale(15);
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   CARD HOVER
+   ========================================================= */
+
+.skill-card,
+.project-card,
+.detailed-skill-card,
+.highlight-card,
+.journey-card,
+.value-card,
+.strength-card,
+.tool-card,
+.social-card {
+    transition:
+        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+}
+
+.skill-card:hover,
+.project-card:hover {
+    transform: translateY(-8px);
+}
+
+
+/* =========================================================
+   PROJECT IMAGE EFFECT
+   ========================================================= */
+
+.project-image {
+    transition: background 0.4s ease;
+}
+
+.project-item:hover .project-image {
+    background:
+        radial-gradient(
+            circle at 70% 30%,
+            rgba(124, 58, 237, 0.12),
+            transparent 40%
+        ),
+        var(--surface-light);
+}
+
+.project-image-content {
+    transition:
+        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.35s ease;
+}
+
+.project-item:hover .project-image-content {
+    transform: scale(1.05);
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -7px;
+    width: 0;
+    height: 2px;
+    border-radius: 10px;
+    background: linear-gradient(
+        90deg,
+        var(--primary),
+        var(--secondary)
+    );
+    transform: translateX(-50%);
+    transition: width 0.25s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 70%;
+}
+
+
+/* =========================================================
+   CTA ANIMATION
+   ========================================================= */
+
+.cta-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-container::before {
+    content: "";
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    top: -180px;
+    right: -100px;
+    border-radius: 50%;
+    background: rgba(37, 99, 235, 0.08);
+    animation: ctaOrb 8s ease-in-out infinite;
+}
+
+@keyframes ctaOrb {
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(-30px, 25px);
+    }
+}
+
+
+/* =========================================================
+   SKILLS / DATA VISUAL EFFECTS
+   ========================================================= */
+
+.detailed-skill-card .skill-icon,
+.tool-icon,
+.value-icon,
+.strength-icon {
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease;
+}
+
+.detailed-skill-card:hover .skill-icon,
+.tool-card:hover .tool-icon,
+.value-card:hover .value-icon,
+.strength-card:hover .strength-icon {
+    transform: scale(1.08) rotate(-3deg);
+}
+
+
+/* =========================================================
+   ML VISUAL
+   ========================================================= */
+
+.ml-circle {
+    animation: mlPulse 4s ease-in-out infinite;
+}
+
+@keyframes mlPulse {
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.04);
+    }
+}
+
+.ml-line i {
+    animation: dataPulse 1.5s ease-in-out infinite;
+}
+
+.ml-line i:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.ml-line i:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes dataPulse {
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: scale(1.45);
+        opacity: 1;
+    }
+}
+
+
+/* =========================================================
+   LEARNING ORBITS
+   ========================================================= */
+
+.orbit-one {
+    animation: orbitSpin 12s linear infinite;
+}
+
+.orbit-two {
+    animation: orbitSpin 18s linear infinite reverse;
+}
+
+@keyframes orbitSpin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/* =========================================================
+   STATUS INDICATOR
+   ========================================================= */
+
+.status-dot {
+    animation: statusPulse 2s infinite;
+}
+
+@keyframes statusPulse {
+    0% {
+        box-shadow:
+            0 0 0 0 rgba(34, 197, 94, 0.35);
+    }
+
+    70% {
+        box-shadow:
+            0 0 0 8px rgba(34, 197, 94, 0);
+    }
+
+    100% {
+        box-shadow:
+            0 0 0 0 rgba(34, 197, 94, 0);
+    }
+}
+
+
+/* =========================================================
+   PROGRESS BARS
+   ========================================================= */
+
+.progress-bar span {
+    transform-origin: left center;
+    animation: progressGrow 1.3s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes progressGrow {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}
+
+
+/* =========================================================
+   TIMELINE
+   ========================================================= */
+
+.timeline-card {
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
+}
+
+.timeline-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.timeline-marker {
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.timeline-item:hover .timeline-marker {
+    transform: translateX(-50%) scale(1.25);
+    box-shadow: 0 0 0 7px rgba(37, 99, 235, 0.1);
+}
+
+
+/* =========================================================
+   CONTACT FORM
+   ========================================================= */
+
+.form-group {
+    transition: transform 0.25s ease;
+}
+
+.form-group:focus-within {
+    transform: translateY(-2px);
+}
+
+.form-submit {
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.form-submit:hover {
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   SCROLL PROGRESS
+   ========================================================= */
+
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(
+        90deg,
+        var(--primary),
+        var(--secondary)
+    );
+    box-shadow: 0 0 10px rgba(37, 99, 235, 0.25);
+}
+
+
+/* =========================================================
+   BACK TO TOP
+   ========================================================= */
+
+.back-to-top {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    z-index: 900;
+    width: 45px;
+    height: 45px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--text);
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(12px);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(15px);
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease,
+        transform 0.3s ease,
+        background 0.3s ease,
+        color 0.3s ease;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-4px);
+}
+
+
+/* =========================================================
+   STAGGERED ANIMATIONS
+   ========================================================= */
+
+.skill-grid .skill-card:nth-child(1),
+.detailed-skills-grid .detailed-skill-card:nth-child(1),
+.projects-showcase .project-item:nth-child(1),
+.journey-grid .journey-card:nth-child(1),
+.values-grid .value-card:nth-child(1),
+.strengths-grid .strength-card:nth-child(1) {
+    transition-delay: 0.05s;
+}
+
+.skill-grid .skill-card:nth-child(2),
+.detailed-skills-grid .detailed-skill-card:nth-child(2),
+.projects-showcase .project-item:nth-child(2),
+.journey-grid .journey-card:nth-child(2),
+.values-grid .value-card:nth-child(2),
+.strengths-grid .strength-card:nth-child(2) {
+    transition-delay: 0.1s;
+}
+
+.skill-grid .skill-card:nth-child(3),
+.detailed-skills-grid .detailed-skill-card:nth-child(3),
+.projects-showcase .project-item:nth-child(3),
+.journey-grid .journey-card:nth-child(3),
+.values-grid .value-card:nth-child(3),
+.strengths-grid .strength-card:nth-child(3) {
+    transition-delay: 0.15s;
+}
+
+.skill-grid .skill-card:nth-child(4),
+.detailed-skills-grid .detailed-skill-card:nth-child(4),
+.projects-showcase .project-item:nth-child(4),
+.values-grid .value-card:nth-child(4),
+.strengths-grid .strength-card:nth-child(4) {
+    transition-delay: 0.2s;
+}
+
+
+/* =========================================================
+   PAGE LOADING
+   ========================================================= */
+
+.page-hidden {
+    opacity: 0;
+}
+
+.page-loaded {
+    animation: pageReady 0.5s ease forwards;
+}
+
+@keyframes pageReady {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .reveal,
+    .reveal-left,
+    .reveal-right,
+    .reveal-scale {
+        opacity: 1;
+        transform: none;
+    }
+}
