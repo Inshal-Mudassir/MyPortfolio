@@ -1,396 +1,675 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Inshal Mudassir · Computer Science student, Web Developer & ML enthusiast." />
-  <meta property="og:title" content="Inshal Mudassir · Developer Portfolio" />
-  <meta property="og:description" content="Modern web experiences, data science, and intelligent solutions." />
-  <title>Inshal Mudassir · Developer</title>
-  <!-- Tailwind + base style -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <style>
-    /* CSS Variables – light theme */
-    :root {
-      --bg-white: #fcfcfc;
-      --bg-soft-blue: #f0f5fe;
-      --bg-lavender: #f2edff;
-      --accent-blue: #3b82f6;
-      --accent-cyan: #22d3ee;
-      --accent-lavender: #a78bfa;
-      --gradient-primary: linear-gradient(135deg, #3b82f6, #a78bfa);
-      --text-charcoal: #1e293b;
-      --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.04);
-      --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.02);
-      --radius-card: 1.5rem;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background-color: var(--bg-white);
-      color: var(--text-charcoal);
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      line-height: 1.6;
-      scroll-behavior: smooth;
-      overflow-x: hidden;
-    }
-    .bg-soft-blue { background-color: var(--bg-soft-blue); }
-    .bg-lavender-light { background-color: var(--bg-lavender); }
-    .text-gradient {
-      background: var(--gradient-primary);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .border-gradient {
-      border-image: linear-gradient(135deg, #3b82f6, #a78bfa) 1;
-      border-radius: 2rem;
-    }
-    .glass-card {
-      background: rgba(255, 255, 255, 0.6);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      border: 1px solid rgba(255,255,255,0.5);
-      box-shadow: var(--shadow-soft);
-    }
-    /* floating blobs */
-    .blob {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(70px);
-      opacity: 0.3;
-      z-index: 0;
-      pointer-events: none;
-    }
-    .blob-blue { background: #93c5fd; width: 280px; height: 280px; }
-    .blob-lavender { background: #c4b5fd; width: 240px; height: 240px; }
-    .blob-cyan { background: #67e8f9; width: 200px; height: 200px; }
-    /* cards */
-    .skill-card, .tool-card, .project-card, .what-card, .connect-card {
-      background: white;
-      border-radius: var(--radius-card);
-      box-shadow: var(--shadow-card);
-      transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
-      border: 1px solid rgba(0,0,0,0.02);
-    }
-    .skill-card:hover, .tool-card:hover, .project-card:hover, .what-card:hover, .connect-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 18px 40px rgba(59,130,246,0.08);
-      border-color: rgba(59,130,246,0.15);
-    }
-    .tool-card:hover i { transform: scale(1.12); color: var(--accent-blue); }
-    /* navbar */
-    .navbar {
-      background: rgba(255,255,255,0.72);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.5);
-      box-shadow: 0 6px 24px rgba(0,0,0,0.02);
-      transition: all 0.25s ease;
-    }
-    .navbar.scrolled {
-      background: rgba(255,255,255,0.92);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.04);
-    }
-    .nav-link {
-      position: relative;
-      font-weight: 500;
-      color: #334155;
-      transition: color 0.2s;
-    }
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 0;
-      width: 0; height: 2px;
-      background: var(--gradient-primary);
-      transition: width 0.3s ease;
-      border-radius: 2px;
-    }
-    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
-    .nav-link:hover { color: var(--accent-blue); }
-    /* terminal */
-    .terminal-light {
-      background: #f9fafc;
-      border: 1px solid #e9edf4;
-      border-radius: 1.25rem;
-      box-shadow: var(--shadow-soft);
-      font-family: 'JetBrains Mono', 'Fira Code', monospace;
-    }
-    .terminal-line {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.25rem 0;
-      color: #1e293b;
-    }
-    .terminal-prompt { color: #3b82f6; font-weight: 500; }
-    .terminal-cmd { color: #1e293b; }
-    .terminal-output { color: #4b5563; }
-    /* timeline */
-    .timeline-dot {
-      width: 14px; height: 14px;
-      background: var(--gradient-primary);
-      border-radius: 50%;
-      border: 3px solid white;
-      box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
-    }
-    .timeline-line {
-      width: 2px;
-      background: linear-gradient(to bottom, #3b82f6, #a78bfa);
-      opacity: 0.4;
-    }
-    /* scroll reveal */
-    .reveal { opacity: 0; transform: translateY(28px); transition: all 0.7s cubic-bezier(0.2, 0, 0, 1); }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-left { opacity: 0; transform: translateX(-24px); transition: all 0.7s cubic-bezier(0.2, 0, 0, 1); }
-    .reveal-left.visible { opacity: 1; transform: translateX(0); }
-    .reveal-right { opacity: 0; transform: translateX(24px); transition: all 0.7s cubic-bezier(0.2, 0, 0, 1); }
-    .reveal-right.visible { opacity: 1; transform: translateX(0); }
-    /* mobile menu */
-    .mobile-menu { transition: all 0.3s ease; }
-    /* misc */
-    .shadow-glow { box-shadow: 0 8px 32px rgba(59,130,246,0.08); }
-    .btn-primary {
-      background: var(--gradient-primary);
-      color: white;
-      border: none;
-      padding: 0.7rem 2rem;
-      border-radius: 60px;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      box-shadow: 0 6px 18px rgba(59,130,246,0.18);
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 28px rgba(59,130,246,0.22);
-    }
-    .btn-outline {
-      background: transparent;
-      border: 1.5px solid #3b82f6;
-      color: #3b82f6;
-      padding: 0.7rem 2rem;
-      border-radius: 60px;
-      font-weight: 500;
-      transition: all 0.3s ease;
-    }
-    .btn-outline:hover { background: #3b82f6; color: white; transform: translateY(-2px); }
-    @media (max-width: 640px) {
-      .hero-heading { font-size: 2.5rem; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Inshal Mudassir — Web Developer &amp; Data Science Enthusiast</title>
+<meta name="description" content="Portfolio of Inshal Mudassir, a Computer Science student building modern web experiences and exploring data science and machine learning with Python." />
+<meta name="keywords" content="Inshal Mudassir, Web Developer, Data Science, Machine Learning, Python, Portfolio" />
+<meta name="author" content="Inshal Mudassir" />
+
+<meta property="og:title" content="Inshal Mudassir — Web Developer &amp; Data Science Enthusiast" />
+<meta property="og:description" content="Computer Science student building modern web experiences and exploring data, ML and intelligent solutions with Python." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <!-- Background blobs -->
-  <div class="blob blob-blue top-[-60px] left-[-80px]"></div>
-  <div class="blob blob-lavender bottom-[10%] right-[-40px]"></div>
-  <div class="blob blob-cyan top-[40%] left-[70%]"></div>
 
-  <!-- Navbar -->
-  <nav id="navbar" class="navbar fixed top-4 left-4 right-4 z-50 rounded-full px-6 py-3 mx-auto max-w-6xl transition-all duration-300">
-    <div class="flex items-center justify-between">
-      <a href="#" class="text-2xl font-bold tracking-tight text-charcoal">Inshal.</a>
-      <div class="hidden md:flex items-center gap-6 text-sm font-medium">
-        <a href="#home" class="nav-link active">Home</a>
-        <a href="#about" class="nav-link">About</a>
-        <a href="#skills" class="nav-link">Skills</a>
-        <a href="#tools" class="nav-link">Tools</a>
-        <a href="#projects" class="nav-link">Projects</a>
-        <a href="#education" class="nav-link">Education</a>
-        <a href="#contact" class="nav-link">Contact</a>
+<!-- ================= NAVBAR ================= -->
+<header class="navbar" id="navbar">
+  <div class="navbar__inner">
+    <a href="#home" class="navbar__logo">Inshal<span class="dot">.</span></a>
+
+    <nav class="navbar__links" id="navLinks">
+      <a href="#home" class="nav-link active" data-section="home">Home</a>
+      <a href="#about" class="nav-link" data-section="about">About</a>
+      <a href="#skills" class="nav-link" data-section="skills">Skills</a>
+      <a href="#tools" class="nav-link" data-section="tools">Tools</a>
+      <a href="#projects" class="nav-link" data-section="projects">Projects</a>
+      <a href="#education" class="nav-link" data-section="education">Education</a>
+      <a href="#contact" class="nav-link" data-section="contact">Contact</a>
+    </nav>
+
+    <button class="navbar__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home" class="mobile-link">Home</a>
+    <a href="#about" class="mobile-link">About</a>
+    <a href="#skills" class="mobile-link">Skills</a>
+    <a href="#tools" class="mobile-link">Tools</a>
+    <a href="#projects" class="mobile-link">Projects</a>
+    <a href="#education" class="mobile-link">Education</a>
+    <a href="#contact" class="mobile-link">Contact</a>
+  </div>
+</header>
+
+<main>
+
+<!-- ================= HERO ================= -->
+<section id="home" class="hero">
+  <div class="hero__bg" aria-hidden="true">
+    <div class="blob blob--one"></div>
+    <div class="blob blob--two"></div>
+    <div class="dot-grid"></div>
+  </div>
+
+  <div class="hero__inner container">
+    <div class="hero__content reveal">
+      <p class="hero__kicker">Computer Science Student &middot; Web Developer &middot; Data Science &amp; ML Enthusiast</p>
+      <h1 class="hero__heading">
+        Hi, I'm <span class="gradient-text">Inshal Mudassir</span>
+      </h1>
+      <p class="hero__desc">
+        I build modern web experiences and explore data, machine learning, and intelligent solutions using Python and modern technologies.
+      </p>
+
+      <div class="hero__actions">
+        <a href="#projects" class="btn btn--primary">Explore My Work</a>
+        <a href="#contact" class="btn btn--ghost">Let's Connect</a>
       </div>
-      <button id="menu-toggle" class="md:hidden text-2xl focus:outline-none"><i class="fas fa-bars"></i></button>
-    </div>
-    <!-- Mobile menu -->
-    <div id="mobile-menu" class="mobile-menu md:hidden mt-4 space-y-2 pb-2 hidden">
-      <a href="#home" class="block nav-link">Home</a>
-      <a href="#about" class="block nav-link">About</a>
-      <a href="#skills" class="block nav-link">Skills</a>
-      <a href="#tools" class="block nav-link">Tools</a>
-      <a href="#projects" class="block nav-link">Projects</a>
-      <a href="#education" class="block nav-link">Education</a>
-      <a href="#contact" class="block nav-link">Contact</a>
-    </div>
-  </nav>
 
-  <main class="max-w-6xl mx-auto px-4 sm:px-6 pt-28 pb-12 space-y-28">
-    <!-- Hero -->
-    <section id="home" class="relative pt-4">
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div class="space-y-6">
-          <h1 class="hero-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">Hi, I'm <span class="text-gradient">Inshal Mudassir</span></h1>
-          <p class="text-xl text-slate-600 font-medium">Computer Science Student · Web Developer · Data Science &amp; ML Enthusiast</p>
-          <p class="text-slate-500 max-w-md">I build modern web experiences and explore data, machine learning, and intelligent solutions using Python and modern technologies.</p>
-          <div class="flex flex-wrap gap-4 pt-2">
-            <a href="#projects" class="btn-primary"><i class="fas fa-code mr-2"></i>Explore My Work</a>
-            <a href="#contact" class="btn-outline"><i class="fas fa-paper-plane mr-2"></i>Let's Connect</a>
+      <div class="hero__socials" aria-label="Social links">
+        <a href="#" class="social-icon" aria-label="GitHub" data-tip="GitHub">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.4 0 12.07c0 5.34 3.44 9.87 8.2 11.47.6.11.82-.26.82-.58v-2.17c-3.34.73-4.04-1.63-4.04-1.63-.55-1.4-1.34-1.78-1.34-1.78-1.09-.76.08-.74.08-.74 1.2.09 1.84 1.25 1.84 1.25 1.07 1.86 2.8 1.32 3.49 1.01.1-.79.42-1.32.76-1.63-2.67-.31-5.47-1.36-5.47-6.03 0-1.33.46-2.42 1.24-3.28-.13-.31-.54-1.56.12-3.24 0 0 1.01-.33 3.3 1.26a11.3 11.3 0 0 1 6 0c2.28-1.59 3.29-1.26 3.29-1.26.66 1.68.25 2.93.12 3.24.77.86 1.24 1.95 1.24 3.28 0 4.68-2.81 5.72-5.49 6.02.43.38.81 1.12.81 2.27v3.36c0 .32.22.7.83.58C20.57 21.93 24 17.4 24 12.07 24 5.4 18.63 0 12 0Z"/></svg>
+        </a>
+        <a href="#" class="social-icon" aria-label="LinkedIn" data-tip="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.8 0 0 .78 0 1.73v20.53C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.74V1.73C24 .78 23.2 0 22.22 0Z"/></svg>
+        </a>
+        <a href="#" class="social-icon" aria-label="Instagram" data-tip="Instagram">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07c-1.28.06-2.15.26-2.91.56-.79.31-1.46.72-2.13 1.38-.67.67-1.07 1.34-1.38 2.13-.3.76-.5 1.63-.56 2.91C.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.28.26 2.15.56 2.91.31.79.72 1.46 1.38 2.13.67.67 1.34 1.07 2.13 1.38.76.3 1.63.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.28-.06 2.15-.26 2.91-.56.79-.31 1.46-.72 2.13-1.38.67-.67 1.07-1.34 1.38-2.13.3-.76.5-1.63.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.28-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.38-2.13A5.9 5.9 0 0 0 19.86.63c-.76-.3-1.63-.5-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32Zm0 10.16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.41-10.4a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0Z"/></svg>
+        </a>
+        <a href="#" class="social-icon" aria-label="WhatsApp" data-tip="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.48-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.87 1.22 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.35.2 1.86.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35ZM12.02 2C6.5 2 2.02 6.48 2.02 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.33A9.94 9.94 0 0 0 12.02 22C17.55 22 22 17.52 22 12S17.55 2 12.02 2Zm0 18.06c-1.66 0-3.2-.46-4.52-1.25l-.32-.19-3 .79.8-2.93-.21-.3a8.03 8.03 0 0 1-1.24-4.28c0-4.46 3.63-8.09 8.09-8.09S20.11 7.54 20.11 12s-3.63 8.06-8.09 8.06Z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero__visual reveal reveal--delay">
+      <div class="dev-illustration">
+        <div class="floating-card card--terminal">
+          <div class="terminal-dots"><span></span><span></span><span></span></div>
+          <div class="terminal-line"><span class="t-prompt">&gt;</span> import pandas as pd</div>
+          <div class="terminal-line"><span class="t-prompt">&gt;</span> model.fit(X, y)</div>
+          <div class="terminal-line typing"><span class="t-prompt">&gt;</span> <span id="heroTyping"></span><span class="cursor">|</span></div>
+        </div>
+
+        <div class="floating-card card--badge badge--html">HTML5</div>
+        <div class="floating-card card--badge badge--css">CSS3</div>
+        <div class="floating-card card--badge badge--js">JS</div>
+        <div class="floating-card card--badge badge--py">Python</div>
+
+        <div class="floating-card card--chart" aria-hidden="true">
+          <svg viewBox="0 0 100 60">
+            <polyline points="0,45 15,35 30,40 45,20 60,28 75,10 100,15" fill="none" stroke="url(#chartGrad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <defs>
+              <linearGradient id="chartGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#3E7BFA"/>
+                <stop offset="100%" stop-color="#9B7BFF"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+
+        <div class="blob-shape blob-shape--a"></div>
+        <div class="blob-shape blob-shape--b"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about" class="about">
+  <div class="container about__grid">
+    <div class="about__text reveal">
+      <h2 class="section-heading">About Me</h2>
+      <p>
+        I'm a Computer Science student who enjoys the space where building software meets understanding data.
+        On one side, I design and build clean, responsive websites with HTML, CSS, JavaScript and Tailwind CSS.
+        On the other, I work with Python to explore data science and machine learning — cleaning datasets,
+        visualizing patterns, and training models that turn raw numbers into something useful.
+      </p>
+      <p>
+        My day-to-day toolkit includes Python, MongoDB, Git and a Linux environment, and I'm steadily
+        expanding into deeper data analysis and applied machine learning as I move through my degree.
+      </p>
+
+      <ul class="about__tags">
+        <li>Web Development</li>
+        <li>Python</li>
+        <li>Data Science</li>
+        <li>Machine Learning</li>
+        <li>Data Analysis</li>
+        <li>Databases</li>
+        <li>Linux</li>
+        <li>Modern Software Development</li>
+      </ul>
+    </div>
+
+    <div class="about__visual reveal reveal--delay">
+      <div class="profile-card">
+        <div class="profile-card__badges">
+          <span class="mini-badge mini-badge--1">Py</span>
+          <span class="mini-badge mini-badge--2">JS</span>
+          <span class="mini-badge mini-badge--3">DB</span>
+        </div>
+
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="info-label">Education</span>
+            <span class="info-value">BS Computer Science</span>
           </div>
-          <div class="flex gap-5 text-2xl text-slate-500 pt-2">
-            <a href="#" aria-label="GitHub"><i class="fab fa-github hover:text-blue-600 transition"></i></a>
-            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in hover:text-blue-600 transition"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fab fa-instagram hover:text-pink-500 transition"></i></a>
-            <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp hover:text-green-500 transition"></i></a>
+          <div class="info-item">
+            <span class="info-label">Journey</span>
+            <span class="info-value">2023 — 2027</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Focus</span>
+            <span class="info-value">Web Development + Data Science</span>
+          </div>
+          <div class="info-item">
+            <span class="info-label">Environment</span>
+            <span class="info-value">Linux + VS Code</span>
           </div>
         </div>
-        <div class="relative flex justify-center">
-          <div class="glass-card rounded-3xl p-6 w-full max-w-sm relative z-10">
-            <div class="grid grid-cols-2 gap-3 text-sm">
-              <div class="bg-white/70 p-3 rounded-xl shadow-sm border"><i class="fab fa-html5 text-orange-500 mr-1"></i> HTML5</div>
-              <div class="bg-white/70 p-3 rounded-xl shadow-sm border"><i class="fab fa-css3-alt text-blue-500 mr-1"></i> CSS3</div>
-              <div class="bg-white/70 p-3 rounded-xl shadow-sm border"><i class="fab fa-js text-yellow-500 mr-1"></i> JS</div>
-              <div class="bg-white/70 p-3 rounded-xl shadow-sm border"><i class="fab fa-python text-blue-400 mr-1"></i> Python</div>
-              <div class="bg-white/70 p-3 rounded-xl shadow-sm border col-span-2"><i class="fas fa-database text-cyan-500 mr-1"></i> Pandas · NumPy</div>
-              <div class="bg-white/70 p-3 rounded-xl shadow-sm border col-span-2"><i class="fas fa-microchip text-lavender-500 mr-1"></i> Scikit-learn · ML</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SKILLS ================= -->
+<section id="skills" class="skills">
+  <div class="container">
+    <div class="section-intro reveal">
+      <h2 class="section-heading">Skills &amp; Expertise</h2>
+      <p class="section-sub">What I use to design, build and analyze.</p>
+    </div>
+
+    <div class="skills__grid">
+
+      <div class="skill-card reveal">
+        <div class="skill-card__icon icon--blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16l-1.5 15L12 21l-6.5-2L4 4Z"/><path d="M8 8h8l-.3 3H9.3l.2 2h6l-.4 4-3.1 1-3.1-1-.2-2"/></svg>
+        </div>
+        <h3>Web Development</h3>
+        <p>HTML5, CSS3, JavaScript, Tailwind CSS and responsive, accessible layouts.</p>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-card__icon icon--purple">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9.5 3h3l.5 3.5 2-2.7 2.6 1.5-1 3.3 3.3-1 1.5 2.6-2.7 2 3.5.5v3l-3.5.5 2.7 2-1.5 2.6-3.3-1 1 3.3-2.6 1.5-2-2.7-.5 3.5h-3l-.5-3.5-2 2.7-2.6-1.5 1-3.3-3.3 1-1.5-2.6 2.7-2L3 13v-3l3.5-.5-2.7-2 1.5-2.6 3.3 1-1-3.3L10.1 1l2 2.7L9.5 3Z" opacity=".0"/><circle cx="12" cy="12" r="3.4"/><path d="M12 3v2.4M12 18.6V21M21 12h-2.4M5.4 12H3M18.1 5.9l-1.7 1.7M7.6 16.4l-1.7 1.7M18.1 18.1l-1.7-1.7M7.6 7.6 5.9 5.9"/></svg>
+        </div>
+        <h3>Programming</h3>
+        <p>Python as my primary language for scripting, tooling and data work.</p>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-card__icon icon--cyan">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V5M4 19h16M8 16v-5M12.5 16V8M17 16v-8"/></svg>
+        </div>
+        <h3>Data Science</h3>
+        <p>NumPy, Pandas, Matplotlib and Seaborn for analysis and visualization.</p>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-card__icon icon--blue">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="12" cy="18" r="2.4"/><path d="M7.9 7.3 10.4 16M16.1 7.3 13.6 16M8.4 6h7.2"/></svg>
+        </div>
+        <h3>Machine Learning</h3>
+        <p>Scikit-learn, preprocessing, feature engineering, regression, classification and model evaluation.</p>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-card__icon icon--purple">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5V12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5V5.5"/><path d="M5 12v6.5c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5V12"/></svg>
+        </div>
+        <h3>Database</h3>
+        <p>MongoDB for storing, structuring and querying application data.</p>
+      </div>
+
+      <div class="skill-card reveal">
+        <div class="skill-card__icon icon--cyan">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="4" width="17" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <h3>Development</h3>
+        <p>Git, GitHub, VS Code, Linux and Jupyter Notebook as my daily environment.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= TOOLS ================= -->
+<section id="tools" class="tools">
+  <div class="container">
+    <div class="section-intro reveal">
+      <h2 class="section-heading">Tools I Work With</h2>
+      <p class="section-sub">The technology wall behind everything I build.</p>
+    </div>
+
+    <div class="tools__wall" id="toolsWall">
+      <!-- populated by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHAT I DO ================= -->
+<section id="what-i-do" class="what-i-do">
+  <div class="container">
+    <div class="section-intro reveal">
+      <h2 class="section-heading">What I Do</h2>
+    </div>
+
+    <div class="whatido__grid">
+      <div class="whatido-card whatido-card--blue reveal">
+        <h3>Web Development</h3>
+        <p>Building responsive and modern websites using HTML, CSS, JavaScript and Tailwind CSS.</p>
+      </div>
+      <div class="whatido-card whatido-card--lavender reveal">
+        <h3>Data Analysis</h3>
+        <p>Working with Python, Pandas, NumPy and visualization libraries to understand and present data.</p>
+      </div>
+      <div class="whatido-card whatido-card--cyan reveal">
+        <h3>Machine Learning</h3>
+        <p>Exploring regression, classification, preprocessing and model evaluation using Scikit-learn.</p>
+      </div>
+      <div class="whatido-card whatido-card--peach reveal">
+        <h3>Database &amp; Development</h3>
+        <p>Working with MongoDB, Git, GitHub, VS Code and Linux development environments.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROJECTS ================= -->
+<section id="projects" class="projects">
+  <div class="container">
+    <div class="section-intro reveal">
+      <h2 class="section-heading">Featured Projects</h2>
+      <p class="section-sub">A mix of web builds and data-driven experiments.</p>
+    </div>
+
+    <div class="projects__filters reveal" role="tablist" aria-label="Filter projects">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="web">Web</button>
+      <button class="filter-btn" data-filter="data">Data</button>
+      <button class="filter-btn" data-filter="ml">Machine Learning</button>
+    </div>
+
+    <div class="projects__grid" id="projectsGrid">
+
+      <article class="project-card reveal" data-cat="web">
+        <div class="project-card__preview preview--web" aria-hidden="true">
+          <div class="preview-window">
+            <div class="preview-window__bar"><span></span><span></span><span></span></div>
+            <div class="preview-window__body">
+              <div class="preview-line w-70"></div>
+              <div class="preview-line w-40"></div>
+              <div class="preview-block"></div>
             </div>
-            <div class="mt-3 p-2 bg-white/60 rounded-xl border flex items-center gap-2 text-xs"><i class="fas fa-terminal text-blue-500"></i> <span class="font-mono">$ whoami → Inshal</span></div>
-          </div>
-          <!-- floating decorations -->
-          <div class="absolute -top-6 -right-6 w-20 h-20 bg-cyan-200/40 rounded-full blur-2xl"></div>
-          <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-lavender-200/40 rounded-full blur-2xl"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- About -->
-    <section id="about" class="reveal">
-      <div class="grid md:grid-cols-5 gap-10 items-center">
-        <div class="md:col-span-3 space-y-4">
-          <h2 class="text-3xl font-bold">About Me</h2>
-          <p class="text-slate-600">Computer Science student with a passion for Web Development, Python, Data Science, and Machine Learning. I enjoy building intelligent systems, analyzing data, and crafting modern digital experiences.</p>
-          <div class="grid grid-cols-2 gap-4 pt-2">
-            <div class="bg-white/70 p-4 rounded-2xl shadow-sm border"><span class="font-semibold">🎓 Education</span><br><span class="text-sm text-slate-500">BS Computer Science</span></div>
-            <div class="bg-white/70 p-4 rounded-2xl shadow-sm border"><span class="font-semibold">📅 Journey</span><br><span class="text-sm text-slate-500">2023 — 2027</span></div>
-            <div class="bg-white/70 p-4 rounded-2xl shadow-sm border"><span class="font-semibold">🎯 Focus</span><br><span class="text-sm text-slate-500">Web + Data Science</span></div>
-            <div class="bg-white/70 p-4 rounded-2xl shadow-sm border"><span class="font-semibold">💻 Environment</span><br><span class="text-sm text-slate-500">Linux + VS Code</span></div>
           </div>
         </div>
-        <div class="md:col-span-2 flex flex-wrap gap-3 justify-center">
-          <span class="bg-white/70 px-5 py-2 rounded-full shadow-sm border text-sm"><i class="fab fa-python text-blue-400"></i> Python</span>
-          <span class="bg-white/70 px-5 py-2 rounded-full shadow-sm border text-sm"><i class="fas fa-code text-blue-500"></i> Web Dev</span>
-          <span class="bg-white/70 px-5 py-2 rounded-full shadow-sm border text-sm"><i class="fas fa-chart-line text-cyan-500"></i> Data Analysis</span>
-          <span class="bg-white/70 px-5 py-2 rounded-full shadow-sm border text-sm"><i class="fas fa-brain text-lavender-500"></i> ML</span>
-          <span class="bg-white/70 px-5 py-2 rounded-full shadow-sm border text-sm"><i class="fas fa-database text-cyan-600"></i> MongoDB</span>
-          <span class="bg-white/70 px-5 py-2 rounded-full shadow-sm border text-sm"><i class="fab fa-linux text-slate-500"></i> Linux</span>
+        <div class="project-card__body">
+          <h3>Personal Portfolio Site</h3>
+          <p>A responsive personal website built to showcase projects and skills, with smooth scroll interactions.</p>
+          <div class="badge-row">
+            <span class="tech-badge">HTML5</span>
+            <span class="tech-badge">CSS3</span>
+            <span class="tech-badge">JavaScript</span>
+          </div>
+          <div class="project-card__links">
+            <a href="#" class="link-btn">GitHub</a>
+            <a href="#" class="link-btn link-btn--ghost">Live Demo</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card reveal" data-cat="web">
+        <div class="project-card__preview preview--form" aria-hidden="true">
+          <div class="preview-window">
+            <div class="preview-window__bar"><span></span><span></span><span></span></div>
+            <div class="preview-window__body">
+              <div class="preview-input"></div>
+              <div class="preview-input"></div>
+              <div class="preview-btn"></div>
+            </div>
+          </div>
+        </div>
+        <div class="project-card__body">
+          <h3>Restaurant Ordering UI</h3>
+          <p>A clean, card-based interface concept for browsing a menu and placing an order.</p>
+          <div class="badge-row">
+            <span class="tech-badge">HTML5</span>
+            <span class="tech-badge">Tailwind CSS</span>
+            <span class="tech-badge">JavaScript</span>
+          </div>
+          <div class="project-card__links">
+            <a href="#" class="link-btn">GitHub</a>
+            <a href="#" class="link-btn link-btn--ghost">Live Demo</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card reveal" data-cat="data">
+        <div class="project-card__preview preview--data" aria-hidden="true">
+          <svg viewBox="0 0 200 100" class="preview-chart">
+            <rect x="10" y="55" width="18" height="35" rx="3" fill="#B9D4FF"/>
+            <rect x="40" y="35" width="18" height="55" rx="3" fill="#8FB8FF"/>
+            <rect x="70" y="20" width="18" height="70" rx="3" fill="#6FA1FF"/>
+            <rect x="100" y="45" width="18" height="45" rx="3" fill="#8FB8FF"/>
+            <rect x="130" y="10" width="18" height="80" rx="3" fill="#5B8DEF"/>
+            <rect x="160" y="30" width="18" height="60" rx="3" fill="#8FB8FF"/>
+          </svg>
+        </div>
+        <div class="project-card__body">
+          <h3>Exploratory Data Analysis Notebook</h3>
+          <p>A Jupyter notebook cleaning a raw dataset with Pandas and visualizing trends with Matplotlib and Seaborn.</p>
+          <div class="badge-row">
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">Pandas</span>
+            <span class="tech-badge">Seaborn</span>
+          </div>
+          <div class="project-card__links">
+            <a href="#" class="link-btn">GitHub</a>
+            <a href="#" class="link-btn link-btn--ghost">Live Demo</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card reveal" data-cat="ml">
+        <div class="project-card__preview preview--ml" aria-hidden="true">
+          <svg viewBox="0 0 200 100" class="preview-chart">
+            <line x1="10" y1="85" x2="190" y2="20" stroke="#B7A6FF" stroke-width="2" stroke-dasharray="4 4"/>
+            <circle cx="20" cy="70" r="4" fill="#8B7CF6"/>
+            <circle cx="55" cy="60" r="4" fill="#8B7CF6"/>
+            <circle cx="80" cy="45" r="4" fill="#8B7CF6"/>
+            <circle cx="115" cy="42" r="4" fill="#8B7CF6"/>
+            <circle cx="150" cy="28" r="4" fill="#8B7CF6"/>
+            <circle cx="175" cy="22" r="4" fill="#8B7CF6"/>
+          </svg>
+        </div>
+        <div class="project-card__body">
+          <h3>House Price Regression Model</h3>
+          <p>A regression pipeline covering preprocessing, feature engineering and evaluation with Scikit-learn.</p>
+          <div class="badge-row">
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">Scikit-learn</span>
+            <span class="tech-badge">NumPy</span>
+          </div>
+          <div class="project-card__links">
+            <a href="#" class="link-btn">GitHub</a>
+            <a href="#" class="link-btn link-btn--ghost">Live Demo</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card reveal" data-cat="ml">
+        <div class="project-card__preview preview--ml2" aria-hidden="true">
+          <svg viewBox="0 0 200 100" class="preview-chart">
+            <circle cx="60" cy="50" r="30" fill="none" stroke="#9BD7E6" stroke-width="10" stroke-dasharray="60 130"/>
+            <circle cx="60" cy="50" r="30" fill="none" stroke="#6FA1FF" stroke-width="10" stroke-dasharray="40 150" stroke-dashoffset="-60"/>
+            <circle cx="60" cy="50" r="30" fill="none" stroke="#B7A6FF" stroke-width="10" stroke-dasharray="30 160" stroke-dashoffset="-100"/>
+          </svg>
+        </div>
+        <div class="project-card__body">
+          <h3>Classification Model Comparison</h3>
+          <p>Comparing classifier performance and confusion matrices to pick the best fit for a labeled dataset.</p>
+          <div class="badge-row">
+            <span class="tech-badge">Python</span>
+            <span class="tech-badge">Scikit-learn</span>
+            <span class="tech-badge">Matplotlib</span>
+          </div>
+          <div class="project-card__links">
+            <a href="#" class="link-btn">GitHub</a>
+            <a href="#" class="link-btn link-btn--ghost">Live Demo</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card reveal" data-cat="web">
+        <div class="project-card__preview preview--db" aria-hidden="true">
+          <div class="preview-window">
+            <div class="preview-window__bar"><span></span><span></span><span></span></div>
+            <div class="preview-window__body">
+              <div class="preview-row"><span class="dot-status"></span><div class="preview-line w-50"></div></div>
+              <div class="preview-row"><span class="dot-status"></span><div class="preview-line w-30"></div></div>
+              <div class="preview-row"><span class="dot-status"></span><div class="preview-line w-60"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="project-card__body">
+          <h3>MongoDB Admin Dashboard</h3>
+          <p>A lightweight dashboard concept for viewing and managing records stored in MongoDB.</p>
+          <div class="badge-row">
+            <span class="tech-badge">JavaScript</span>
+            <span class="tech-badge">MongoDB</span>
+            <span class="tech-badge">HTML5</span>
+          </div>
+          <div class="project-card__links">
+            <a href="#" class="link-btn">GitHub</a>
+            <a href="#" class="link-btn link-btn--ghost">Live Demo</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= EDUCATION ================= -->
+<section id="education" class="education">
+  <div class="container">
+    <div class="section-intro reveal">
+      <h2 class="section-heading">Education</h2>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline__line" aria-hidden="true"></div>
+      <div class="timeline__item reveal">
+        <div class="timeline__node"></div>
+        <div class="timeline__card">
+          <span class="timeline__years">2023 — 2027</span>
+          <h3>BS Computer Science</h3>
+          <p>Coursework spanning programming fundamentals, databases, and digital image processing, alongside self-driven work in web development and data science.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <!-- Skills -->
-    <section id="skills" class="reveal">
-      <h2 class="text-3xl font-bold mb-8">Skills &amp; Expertise</h2>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="skill-card p-6 bg-white/80"><i class="fas fa-code text-2xl text-blue-500"></i><h3 class="text-xl font-semibold mt-2">Web Development</h3><p class="text-sm text-slate-500">HTML5, CSS3, JavaScript, Tailwind, responsive design</p></div>
-        <div class="skill-card p-6 bg-white/80"><i class="fab fa-python text-2xl text-blue-400"></i><h3 class="text-xl font-semibold mt-2">Programming</h3><p class="text-sm text-slate-500">Python, scripting, automation</p></div>
-        <div class="skill-card p-6 bg-white/80"><i class="fas fa-chart-bar text-2xl text-cyan-500"></i><h3 class="text-xl font-semibold mt-2">Data Science</h3><p class="text-sm text-slate-500">NumPy, Pandas, Matplotlib, Seaborn</p></div>
-        <div class="skill-card p-6 bg-white/80"><i class="fas fa-brain text-2xl text-lavender-500"></i><h3 class="text-xl font-semibold mt-2">Machine Learning</h3><p class="text-sm text-slate-500">Scikit-learn, preprocessing, regression, classification</p></div>
-        <div class="skill-card p-6 bg-white/80"><i class="fas fa-database text-2xl text-cyan-600"></i><h3 class="text-xl font-semibold mt-2">Database</h3><p class="text-sm text-slate-500">MongoDB, data modeling</p></div>
-        <div class="skill-card p-6 bg-white/80"><i class="fas fa-tools text-2xl text-slate-500"></i><h3 class="text-xl font-semibold mt-2">Dev Tools</h3><p class="text-sm text-slate-500">Git, GitHub, VS Code, Linux, Jupyter</p></div>
+<!-- ================= LEARNING JOURNEY ================= -->
+<section id="learning" class="learning">
+  <div class="container">
+    <div class="section-intro reveal">
+      <h2 class="section-heading">Currently Exploring</h2>
+      <p class="section-sub">The roadmap I'm actively working through.</p>
+    </div>
+
+    <div class="roadmap">
+      <div class="roadmap-card reveal">
+        <span class="roadmap-card__icon">🧠</span>
+        <h3>Machine Learning</h3>
       </div>
-    </section>
-
-    <!-- Tools -->
-    <section id="tools" class="reveal">
-      <h2 class="text-3xl font-bold mb-8">Tools I Work With</h2>
-      <div class="flex flex-wrap gap-4 justify-center">
-        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fab fa-html5 text-2xl text-orange-500"></i> HTML</span>
-        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fab fa-css3-alt text-2xl text-blue-500"></i> CSS</span>
-        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fab fa-js text-2xl text-yellow-500"></i> JavaScript</span>
-        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fab fa-tailwind text-2xl text-cyan-400"></i> Tailwind</span>
-        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fab fa-python text-2xl text-blue-400"></i> Python</span>
-        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fas fa-cube text-2xl text-cyan-500"></i> NumPy</span>
-        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fas fa-table text-2xl text-green-500"></i> Pandas</span>
-        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fas fa-chart-pie text-2xl text-purple-400"></i> Matplotlib</span>
-        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fas fa-chart-line text-2xl text-blue-300"></i> Seaborn</span>
-        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fas fa-robot text-2xl text-lavender-500"></i> Scikit-learn</span>
-        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fas fa-database text-2xl text-green-600"></i> MongoDB</span>
-        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fab fa-git-alt text-2xl text-orange-600"></i> Git</span>
-        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fab fa-github text-2xl text-slate-600"></i> GitHub</span>
-        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fas fa-code text-2xl text-blue-600"></i> VS Code</span>
-        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fab fa-linux text-2xl text-slate-500"></i> Linux</span>
-        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fas fa-book text-2xl text-amber-500"></i> Jupyter</span>
+      <div class="roadmap-card reveal">
+        <span class="roadmap-card__icon">📊</span>
+        <h3>Data Science</h3>
       </div>
-    </section>
-
-    <!-- What I do -->
-    <section class="reveal">
-      <h2 class="text-3xl font-bold mb-8">What I Do</h2>
-      <div class="grid sm:grid-cols-2 gap-6">
-        <div class="what-card p-6 bg-white/80 border-l-4 border-blue-400"><i class="fas fa-laptop-code text-3xl text-blue-500"></i><h3 class="text-xl font-semibold mt-2">Web Development</h3><p class="text-sm text-slate-500">Responsive, modern websites with HTML, CSS, JS &amp; Tailwind.</p></div>
-        <div class="what-card p-6 bg-white/80 border-l-4 border-cyan-400"><i class="fas fa-chart-simple text-3xl text-cyan-500"></i><h3 class="text-xl font-semibold mt-2">Data Analysis</h3><p class="text-sm text-slate-500">Python, Pandas, NumPy, visualization for insights.</p></div>
-        <div class="what-card p-6 bg-white/80 border-l-4 border-lavender-400"><i class="fas fa-microchip text-3xl text-lavender-500"></i><h3 class="text-xl font-semibold mt-2">Machine Learning</h3><p class="text-sm text-slate-500">Regression, classification, preprocessing with Scikit-learn.</p></div>
-        <div class="what-card p-6 bg-white/80 border-l-4 border-emerald-400"><i class="fas fa-server text-3xl text-emerald-500"></i><h3 class="text-xl font-semibold mt-2">Database &amp; Dev</h3><p class="text-sm text-slate-500">MongoDB, Git, Linux, VS Code for robust development.</p></div>
+      <div class="roadmap-card reveal">
+        <span class="roadmap-card__icon">🐍</span>
+        <h3>Advanced Python</h3>
       </div>
-    </section>
-
-    <!-- Projects (placeholder) -->
-    <section id="projects" class="reveal">
-      <h2 class="text-3xl font-bold mb-6">Featured Projects</h2>
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="project-card p-6 bg-white/80"><div class="h-32 bg-soft-blue rounded-2xl flex items-center justify-center text-slate-400 border"><i class="fas fa-globe text-4xl opacity-40"></i></div><h3 class="text-xl font-semibold mt-4">Web Project</h3><p class="text-sm text-slate-500">Modern responsive site with Tailwind.</p><div class="flex gap-2 mt-3"><span class="text-xs bg-blue-50 px-3 py-1 rounded-full">HTML</span><span class="text-xs bg-blue-50 px-3 py-1 rounded-full">CSS</span></div><div class="flex gap-4 mt-4"><a href="#" class="text-blue-500 text-sm"><i class="fab fa-github"></i> Code</a><a href="#" class="text-blue-500 text-sm"><i class="fas fa-external-link-alt"></i> Demo</a></div></div>
-        <div class="project-card p-6 bg-white/80"><div class="h-32 bg-lavender-light rounded-2xl flex items-center justify-center text-slate-400 border"><i class="fas fa-chart-line text-4xl opacity-40"></i></div><h3 class="text-xl font-semibold mt-4">Data Analysis</h3><p class="text-sm text-slate-500">Exploratory data analysis with Pandas/Matplotlib.</p><div class="flex gap-2 mt-3"><span class="text-xs bg-blue-50 px-3 py-1 rounded-full">Python</span><span class="text-xs bg-blue-50 px-3 py-1 rounded-full">Pandas</span></div><div class="flex gap-4 mt-4"><a href="#" class="text-blue-500 text-sm"><i class="fab fa-github"></i> Code</a><a href="#" class="text-blue-500 text-sm"><i class="fas fa-external-link-alt"></i> Demo</a></div></div>
+      <div class="roadmap-card reveal">
+        <span class="roadmap-card__icon">📈</span>
+        <h3>Data Visualization</h3>
       </div>
-    </section>
-
-    <!-- Education -->
-    <section id="education" class="reveal">
-      <h2 class="text-3xl font-bold mb-6">Education</h2>
-      <div class="relative pl-8 border-l-2 border-blue-200 ml-4">
-        <div class="absolute -left-3 top-0 w-6 h-6 bg-gradient-to-r from-blue-400 to-lavender-400 rounded-full border-2 border-white shadow"></div>
-        <div class="bg-white/70 p-6 rounded-2xl shadow-sm border max-w-md"><h3 class="text-xl font-semibold">BS Computer Science</h3><p class="text-sm text-slate-500">2023 — 2027</p></div>
+      <div class="roadmap-card reveal">
+        <span class="roadmap-card__icon">🤖</span>
+        <h3>Artificial Intelligence</h3>
       </div>
-    </section>
-
-    <!-- Learning Journey -->
-    <section class="reveal">
-      <h2 class="text-3xl font-bold mb-6">Currently Exploring</h2>
-      <div class="flex flex-wrap gap-3">
-        <span class="bg-white/70 px-5 py-2 rounded-full shadow-sm border">Machine Learning</span>
-        <span class="bg-white/70 px-5 py-2 rounded-full shadow-sm border">Data Science</span>
-        <span class="bg-white/70 px-5 py-2 rounded-full shadow-sm border">Advanced Python</span>
-        <span class="bg-white/70 px-5 py-2 rounded-full shadow-sm border">Data Visualization</span>
-        <span class="bg-white/70 px-5 py-2 rounded-full shadow-sm border">AI</span>
-        <span class="bg-white/70 px-5 py-2 rounded-full shadow-sm border">Modern Web</span>
+      <div class="roadmap-card reveal">
+        <span class="roadmap-card__icon">🌐</span>
+        <h3>Modern Web Development</h3>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
-    <!-- Developer Terminal -->
-    <section class="reveal">
-      <div class="terminal-light p-6 max-w-2xl mx-auto">
-        <div class="flex items-center gap-2 text-sm text-slate-400"><i class="fas fa-circle text-red-400"></i><i class="fas fa-circle text-yellow-400"></i><i class="fas fa-circle text-green-400"></i><span class="ml-2 font-mono">terminal</span></div>
-        <div class="space-y-1 mt-2 font-mono text-sm">
-          <div class="terminal-line"><span class="terminal-prompt">$</span><span class="terminal-cmd"> whoami</span><span class="terminal-output">  Inshal</span></div>
-          <div class="terminal-line"><span class="terminal-prompt">$</span><span class="terminal-cmd"> skills</span><span class="terminal-output">  HTML CSS JavaScript Python</span></div>
-          <div class="terminal-line"><span class="terminal-prompt">$</span><span class="terminal-cmd"> data</span><span class="terminal-output">  NumPy Pandas Matplotlib</span></div>
-          <div class="terminal-line"><span class="terminal-prompt">$</span><span class="terminal-cmd"> focus</span><span class="terminal-output">  Web Development + Data Science + ML</span></div>
-          <div class="terminal-line"><span class="terminal-prompt">$</span><span class="terminal-cmd"> status</span><span class="terminal-output typing-cursor">  Always Learning...</span></div>
+<!-- ================= TERMINAL ================= -->
+<section class="dev-terminal">
+  <div class="container">
+    <div class="terminal-card reveal">
+      <div class="terminal-card__bar">
+        <span class="t-dot t-dot--red"></span>
+        <span class="t-dot t-dot--yellow"></span>
+        <span class="t-dot t-dot--green"></span>
+        <span class="terminal-card__title">inshal@portfolio: ~</span>
+      </div>
+      <div class="terminal-card__body" id="terminalBody"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONNECT ================= -->
+<section class="connect">
+  <div class="container">
+    <div class="section-intro reveal">
+      <h2 class="section-heading">Let's Build Something Together</h2>
+      <p class="section-sub">Have an idea, project, or opportunity? Let's connect and create something useful.</p>
+    </div>
+
+    <div class="connect__grid">
+      <a href="#" class="connect-card reveal">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.4 0 12.07c0 5.34 3.44 9.87 8.2 11.47.6.11.82-.26.82-.58v-2.17c-3.34.73-4.04-1.63-4.04-1.63-.55-1.4-1.34-1.78-1.34-1.78-1.09-.76.08-.74.08-.74 1.2.09 1.84 1.25 1.84 1.25 1.07 1.86 2.8 1.32 3.49 1.01.1-.79.42-1.32.76-1.63-2.67-.31-5.47-1.36-5.47-6.03 0-1.33.46-2.42 1.24-3.28-.13-.31-.54-1.56.12-3.24 0 0 1.01-.33 3.3 1.26a11.3 11.3 0 0 1 6 0c2.28-1.59 3.29-1.26 3.29-1.26.66 1.68.25 2.93.12 3.24.77.86 1.24 1.95 1.24 3.28 0 4.68-2.81 5.72-5.49 6.02.43.38.81 1.12.81 2.27v3.36c0 .32.22.7.83.58C20.57 21.93 24 17.4 24 12.07 24 5.4 18.63 0 12 0Z"/></svg>
+        <h3>GitHub</h3>
+        <p>Browse my code and open-source experiments.</p>
+      </a>
+
+      <a href="#" class="connect-card reveal">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.8 0 0 .78 0 1.73v20.53C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.74V1.73C24 .78 23.2 0 22.22 0Z"/></svg>
+        <h3>LinkedIn</h3>
+        <p>Connect with me professionally.</p>
+      </a>
+
+      <a href="#" class="connect-card reveal">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07c-1.28.06-2.15.26-2.91.56-.79.31-1.46.72-2.13 1.38-.67.67-1.07 1.34-1.38 2.13-.3.76-.5 1.63-.56 2.91C.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.28.26 2.15.56 2.91.31.79.72 1.46 1.38 2.13.67.67 1.34 1.07 2.13 1.38.76.3 1.63.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.28-.06 2.15-.26 2.91-.56.79-.31 1.46-.72 2.13-1.38.67-.67 1.07-1.34 1.38-2.13.3-.76.5-1.63.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.28-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.38-2.13A5.9 5.9 0 0 0 19.86.63c-.76-.3-1.63-.5-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32Zm0 10.16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.41-10.4a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0Z"/></svg>
+        <h3>Instagram</h3>
+        <p>A more casual look at what I'm up to.</p>
+      </a>
+
+      <a href="#" class="connect-card reveal">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.48-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.87 1.22 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.35.2 1.86.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35ZM12.02 2C6.5 2 2.02 6.48 2.02 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.33A9.94 9.94 0 0 0 12.02 22C17.55 22 22 17.52 22 12S17.55 2 12.02 2Zm0 18.06c-1.66 0-3.2-.46-4.52-1.25l-.32-.19-3 .79.8-2.93-.21-.3a8.03 8.03 0 0 1-1.24-4.28c0-4.46 3.63-8.09 8.09-8.09S20.11 7.54 20.11 12s-3.63 8.06-8.09 8.06Z"/></svg>
+        <h3>WhatsApp</h3>
+        <p>Reach out directly for quick conversations.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact" class="contact">
+  <div class="container contact__grid">
+    <div class="contact__form-wrap reveal">
+      <h2 class="section-heading">Get In Touch</h2>
+      <p class="section-sub">This form validates on the client only — connect a backend or email service to actually receive messages.</p>
+
+      <form class="contact-form" id="contactForm" novalidate>
+        <div class="form-row">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required minlength="2" placeholder="Your name" />
+          <span class="form-error" data-for="name"></span>
         </div>
-      </div>
-    </section>
 
-    <!-- Social CTA -->
-    <section class="reveal">
-      <div class="bg-soft-blue/50 rounded-3xl p-8 text-center">
-        <h2 class="text-3xl font-bold">Let's Build Something Together</h2>
-        <p class="text-slate-600 max-w-xl mx-auto mt-2">Have an idea, project, or opportunity? Let's connect and create something useful.</p>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 max-w-3xl mx-auto">
-          <a href="#" class="connect-card p-4 bg-white/70 rounded-2xl shadow-sm border flex flex-col items-center"><i class="fab fa-github text-3xl text-slate-600"></i><span class="font-medium">GitHub</span><span class="text-xs text-slate-400">code</span></a>
-          <a href="#" class="connect-card p-4 bg-white/70 rounded-2xl shadow-sm border flex flex-col items-center"><i class="fab fa-linkedin-in text-3xl text-blue-600"></i><span class="font-medium">LinkedIn</span><span class="text-xs text-slate-400">connect</span></a>
-          <a href="#" class="connect-card p-4 bg-white/70 rounded-2xl shadow-sm border flex flex-col items-center"><i class="fab fa-instagram text-3xl text-pink-500"></i><span class="font-medium">Instagram</span><span class="text-xs text-slate-400">follow</span></a>
-          <a href="#" class="connect-card p-4 bg-white/70 rounded-2xl shadow-sm border flex flex-col items-center"><i class="fab fa-whatsapp text-3xl text-green-500"></i><span class="font-medium">WhatsApp</span><span class="text-xs text-slate-400">chat</span></a>
+        <div class="form-row">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required placeholder="you@example.com" />
+          <span class="form-error" data-for="email"></span>
         </div>
-      </div>
-    </section>
 
-    <!-- Contact -->
-    <section id="contact" class="reveal grid md:grid-cols-2 gap-8">
-      <div><h2 class="text-3xl font-bold">Get In Touch</h2><form class="mt-4 space-y-4"><input class="w-full p-3 rounded-xl border bg-white/70" placeholder="Name" /><input class="w-full p-3 rounded-xl border bg-white/70" placeholder="Email" /><input class="w-full p-3 rounded-xl border bg-white/70" placeholder="Subject" /><textarea class="w-full p-3 rounded-xl border bg-white/70" rows="4" placeholder="Message"></textarea><button class="btn-primary"><i class="fas fa-paper-plane mr-2"></i>Send Message →</button></form></div>
-      <div class="flex items-center justify-center"><div class="w-full h-48 bg-soft-blue/40 rounded-3xl flex items-center justify-center text-slate-400 border"><i class="fas fa-envelope-open-text text-6xl opacity-40"></i></div></div>
-    </section>
-  </main>
+        <div class="form-row">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" name="subject" required minlength="3" placeholder="What's this about?" />
+          <span class="form-error" data-for="subject"></span>
+        </div>
 
-  <!-- Footer -->
-  <footer class="bg-white/80 border-t mt-12 py-10 text-center text-slate-500">
-    <p class="text-2xl font-bold text-charcoal">Inshal.</p>
-    <p class="text-sm">Building · Learning · Creating</p>
-    <div class="flex justify-center gap-5 text-xl my-3"><a href
+        <div class="form-row">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required minlength="10" rows="5" placeholder="Tell me a bit more..."></textarea>
+          <span class="form-error" data-for="message"></span>
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--full">Send Message <span aria-hidden="true">→</span></button>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+
+    <div class="contact__illustration reveal reveal--delay" aria-hidden="true">
+      <svg viewBox="0 0 320 320" class="contact-svg">
+        <circle cx="160" cy="160" r="120" fill="#EEF3FF"/>
+        <rect x="70" y="90" width="180" height="120" rx="16" fill="#FFFFFF" stroke="#DCE6FF" stroke-width="2"/>
+        <rect x="90" y="115" width="90" height="10" rx="5" fill="#CFE0FF"/>
+        <rect x="90" y="135" width="140" height="8" rx="4" fill="#E5ECFF"/>
+        <rect x="90" y="150" width="120" height="8" rx="4" fill="#E5ECFF"/>
+        <rect x="90" y="180" width="60" height="16" rx="8" fill="url(#envGrad)"/>
+        <defs>
+          <linearGradient id="envGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#3E7BFA"/>
+            <stop offset="100%" stop-color="#9B7BFF"/>
+          </linearGradient>
+        </defs>
+        <circle cx="245" cy="95" r="14" fill="#DFF7FB"/>
+        <circle cx="75" cy="220" r="10" fill="#F0E9FF"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <a href="#home" class="footer__logo">Inshal<span class="dot">.</span></a>
+      <p>Building &middot; Learning &middot; Creating</p>
+    </div>
+
+    <nav class="footer__links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="footer__socials">
+      <a href="#" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.4 0 12.07c0 5.34 3.44 9.87 8.2 11.47.6.11.82-.26.82-.58v-2.17c-3.34.73-4.04-1.63-4.04-1.63-.55-1.4-1.34-1.78-1.34-1.78-1.09-.76.08-.74.08-.74 1.2.09 1.84 1.25 1.84 1.25 1.07 1.86 2.8 1.32 3.49 1.01.1-.79.42-1.32.76-1.63-2.67-.31-5.47-1.36-5.47-6.03 0-1.33.46-2.42 1.24-3.28-.13-.31-.54-1.56.12-3.24 0 0 1.01-.33 3.3 1.26a11.3 11.3 0 0 1 6 0c2.28-1.59 3.29-1.26 3.29-1.26.66 1.68.25 2.93.12 3.24.77.86 1.24 1.95 1.24 3.28 0 4.68-2.81 5.72-5.49 6.02.43.38.81 1.12.81 2.27v3.36c0 .32.22.7.83.58C20.57 21.93 24 17.4 24 12.07 24 5.4 18.63 0 12 0Z"/></svg>
+      </a>
+      <a href="#" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.61 0 4.28 2.38 4.28 5.47v6.27ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.8 0 0 .78 0 1.73v20.53C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.74V1.73C24 .78 23.2 0 22.22 0Z"/></svg>
+      </a>
+      <a href="#" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07c-1.28.06-2.15.26-2.91.56-.79.31-1.46.72-2.13 1.38-.67.67-1.07 1.34-1.38 2.13-.3.76-.5 1.63-.56 2.91C.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.28.26 2.15.56 2.91.31.79.72 1.46 1.38 2.13.67.67 1.34 1.07 2.13 1.38.76.3 1.63.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.28-.06 2.15-.26 2.91-.56.79-.31 1.46-.72 2.13-1.38.67-.67 1.07-1.34 1.38-2.13.3-.76.5-1.63.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.28-.26-2.15-.56-2.91a5.9 5.9 0 0 0-1.38-2.13A5.9 5.9 0 0 0 19.86.63c-.76-.3-1.63-.5-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32Zm0 10.16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.41-10.4a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0Z"/></svg>
+      </a>
+      <a href="#" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.47 14.38c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.48-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.87 1.22 3.07.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.35.2 1.86.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35ZM12.02 2C6.5 2 2.02 6.48 2.02 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.33A9.94 9.94 0 0 0 12.02 22C17.55 22 22 17.52 22 12S17.55 2 12.02 2Zm0 18.06c-1.66 0-3.2-.46-4.52-1.25l-.32-.19-3 .79.8-2.93-.21-.3a8.03 8.03 0 0 1-1.24-4.28c0-4.46 3.63-8.09 8.09-8.09S20.11 7.54 20.11 12s-3.63 8.06-8.09 8.06Z"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer__bottom">
+    <p>&copy; 2026 Inshal Mudassir. All rights reserved.</p>
+    <button id="backToTop" class="back-to-top">Back to top ↑</button>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
