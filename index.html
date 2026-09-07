@@ -1,870 +1,396 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="description"
-        content="Inshal Mudassir — Developer, Data Science Enthusiast and Computer Science Student."
-    >
-
-    <meta
-        name="author"
-        content="Inshal Mudassir"
-    >
-
-    <title>Inshal Mudassir | Developer & Data Science Enthusiast</title>
-
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="css/responsive.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Inshal Mudassir · Computer Science student, Web Developer & ML enthusiast." />
+  <meta property="og:title" content="Inshal Mudassir · Developer Portfolio" />
+  <meta property="og:description" content="Modern web experiences, data science, and intelligent solutions." />
+  <title>Inshal Mudassir · Developer</title>
+  <!-- Tailwind + base style -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    /* CSS Variables – light theme */
+    :root {
+      --bg-white: #fcfcfc;
+      --bg-soft-blue: #f0f5fe;
+      --bg-lavender: #f2edff;
+      --accent-blue: #3b82f6;
+      --accent-cyan: #22d3ee;
+      --accent-lavender: #a78bfa;
+      --gradient-primary: linear-gradient(135deg, #3b82f6, #a78bfa);
+      --text-charcoal: #1e293b;
+      --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.04);
+      --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.02);
+      --radius-card: 1.5rem;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background-color: var(--bg-white);
+      color: var(--text-charcoal);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+    .bg-soft-blue { background-color: var(--bg-soft-blue); }
+    .bg-lavender-light { background-color: var(--bg-lavender); }
+    .text-gradient {
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .border-gradient {
+      border-image: linear-gradient(135deg, #3b82f6, #a78bfa) 1;
+      border-radius: 2rem;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.5);
+      box-shadow: var(--shadow-soft);
+    }
+    /* floating blobs */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: 0.3;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .blob-blue { background: #93c5fd; width: 280px; height: 280px; }
+    .blob-lavender { background: #c4b5fd; width: 240px; height: 240px; }
+    .blob-cyan { background: #67e8f9; width: 200px; height: 200px; }
+    /* cards */
+    .skill-card, .tool-card, .project-card, .what-card, .connect-card {
+      background: white;
+      border-radius: var(--radius-card);
+      box-shadow: var(--shadow-card);
+      transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+      border: 1px solid rgba(0,0,0,0.02);
+    }
+    .skill-card:hover, .tool-card:hover, .project-card:hover, .what-card:hover, .connect-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(59,130,246,0.08);
+      border-color: rgba(59,130,246,0.15);
+    }
+    .tool-card:hover i { transform: scale(1.12); color: var(--accent-blue); }
+    /* navbar */
+    .navbar {
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.5);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.02);
+      transition: all 0.25s ease;
+    }
+    .navbar.scrolled {
+      background: rgba(255,255,255,0.92);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.04);
+    }
+    .nav-link {
+      position: relative;
+      font-weight: 500;
+      color: #334155;
+      transition: color 0.2s;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 2px;
+      background: var(--gradient-primary);
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+    .nav-link:hover { color: var(--accent-blue); }
+    /* terminal */
+    .terminal-light {
+      background: #f9fafc;
+      border: 1px solid #e9edf4;
+      border-radius: 1.25rem;
+      box-shadow: var(--shadow-soft);
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    }
+    .terminal-line {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.25rem 0;
+      color: #1e293b;
+    }
+    .terminal-prompt { color: #3b82f6; font-weight: 500; }
+    .terminal-cmd { color: #1e293b; }
+    .terminal-output { color: #4b5563; }
+    /* timeline */
+    .timeline-dot {
+      width: 14px; height: 14px;
+      background: var(--gradient-primary);
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+    }
+    .timeline-line {
+      width: 2px;
+      background: linear-gradient(to bottom, #3b82f6, #a78bfa);
+      opacity: 0.4;
+    }
+    /* scroll reveal */
+    .reveal { opacity: 0; transform: translateY(28px); transition: all 0.7s cubic-bezier(0.2, 0, 0, 1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left { opacity: 0; transform: translateX(-24px); transition: all 0.7s cubic-bezier(0.2, 0, 0, 1); }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
+    .reveal-right { opacity: 0; transform: translateX(24px); transition: all 0.7s cubic-bezier(0.2, 0, 0, 1); }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+    /* mobile menu */
+    .mobile-menu { transition: all 0.3s ease; }
+    /* misc */
+    .shadow-glow { box-shadow: 0 8px 32px rgba(59,130,246,0.08); }
+    .btn-primary {
+      background: var(--gradient-primary);
+      color: white;
+      border: none;
+      padding: 0.7rem 2rem;
+      border-radius: 60px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 18px rgba(59,130,246,0.18);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(59,130,246,0.22);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid #3b82f6;
+      color: #3b82f6;
+      padding: 0.7rem 2rem;
+      border-radius: 60px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    .btn-outline:hover { background: #3b82f6; color: white; transform: translateY(-2px); }
+    @media (max-width: 640px) {
+      .hero-heading { font-size: 2.5rem; }
+    }
+  </style>
 </head>
-
-
 <body>
-
-    <!-- =====================================================
-         HEADER
-         ===================================================== -->
-
-    <header class="header">
-
-        <nav class="navbar container">
-
-            <a href="index.html" class="logo">
-                Inshal<span>.</span>
-            </a>
-
-
-            <!-- Desktop / Mobile Navigation -->
-
-            <div class="nav-menu">
-
-                <a href="index.html" class="nav-link active">
-                    Home
-                </a>
-
-                <a href="about.html" class="nav-link">
-                    About
-                </a>
-
-                <a href="skills.html" class="nav-link">
-                    Skills
-                </a>
-
-                <a href="projects.html" class="nav-link">
-                    Projects
-                </a>
-
-                <a href="experience.html" class="nav-link">
-                    Experience
-                </a>
-
-                <a href="contact.html" class="nav-button">
-                    Let's Talk
-                </a>
-
-            </div>
-
-
-            <!-- Mobile Menu -->
-
-            <button
-                class="menu-toggle"
-                type="button"
-                aria-label="Open navigation menu"
-                aria-expanded="false"
-            >
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-
-        </nav>
-
-    </header>
-
-
-
-    <!-- =====================================================
-         HERO
-         ===================================================== -->
-
-    <main>
-
-        <section class="hero" id="home">
-
-            <div class="container hero-container">
-
-
-                <!-- Hero Content -->
-
-                <div class="hero-content">
-
-                    <div class="hero-label reveal">
-                        <span></span>
-                        Hello, I'm
-                    </div>
-
-
-                    <h1 class="hero-title reveal">
-
-                        Inshal
-                        <span>Mudassir</span>
-
-                    </h1>
-
-
-                    <h2 class="hero-role reveal">
-                        Developer & Data Science Enthusiast
-                    </h2>
-
-
-                    <p class="hero-description reveal">
-
-                        I build modern web experiences, explore data,
-                        and turn ideas into practical projects using
-                        Python, JavaScript, and emerging machine
-                        learning technologies.
-
-                    </p>
-
-
-                    <!-- Hero Buttons -->
-
-                    <div class="hero-buttons reveal">
-
-                        <a
-                            href="projects.html"
-                            class="btn btn-primary"
-                        >
-                            View My Work
-
-                            <span class="btn-arrow">
-                                →
-                            </span>
-                        </a>
-
-
-                        <a
-                            href="contact.html"
-                            class="btn btn-secondary"
-                        >
-                            Let's Connect
-                        </a>
-
-                    </div>
-
-
-                    <!-- Social Links -->
-
-                    <div class="hero-socials reveal">
-
-                        <a
-                            href="#"
-                            target="_blank"
-                            aria-label="GitHub"
-                        >
-                            GH
-                        </a>
-
-                        <a
-                            href="#"
-                            target="_blank"
-                            aria-label="LinkedIn"
-                        >
-                            LI
-                        </a>
-
-                        <a
-                            href="#"
-                            target="_blank"
-                            aria-label="Instagram"
-                        >
-                            IG
-                        </a>
-
-                        <a
-                            href="#"
-                            aria-label="WhatsApp"
-                        >
-                            WA
-                        </a>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- =================================================
-                     HERO VISUAL
-                     ================================================= -->
-
-                <div class="hero-visual reveal-scale">
-
-
-                    <!-- Code Window -->
-
-                    <div class="code-window">
-
-                        <div class="code-header">
-
-                            <div class="code-dots">
-
-                                <span></span>
-                                <span></span>
-                                <span></span>
-
-                            </div>
-
-                            <span class="code-title">
-                                portfolio.py
-                            </span>
-
-                        </div>
-
-
-                        <div class="code-body">
-
-<pre><code><span class="code-keyword">class</span> <span class="code-name">Inshal</span>:
-
-    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(self):
-
-        self.name =
-            <span class="code-string">"Inshal Mudassir"</span>
-
-        self.role =
-            <span class="code-string">"Developer"</span>
-
-        self.skills = [
-            <span class="code-string">"HTML"</span>,
-            <span class="code-string">"CSS"</span>,
-            <span class="code-string">"JavaScript"</span>,
-            <span class="code-string">"Python"</span>,
-            <span class="code-string">"Data Science"</span>
-        ]
-
-        self.goal =
-            <span class="code-string">"Keep Building"</span>
-
-<span class="code-comment"># turning ideas into reality</span></code></pre>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- Floating Cards -->
-
-                    <div class="hero-card hero-card-one">
-
-                        <div class="hero-card-number">
-                            01
-                        </div>
-
-                        <div>
-                            <strong>
-                                Developer
-                            </strong>
-
-                            <small>
-                                Building for web
-                            </small>
-                        </div>
-
-                    </div>
-
-
-                    <div class="hero-card hero-card-two">
-
-                        <div class="hero-card-number">
-                            02
-                        </div>
-
-                        <div>
-                            <strong>
-                                Data Science
-                            </strong>
-
-                            <small>
-                                Exploring insights
-                            </small>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             ABOUT INTRO
-             ===================================================== -->
-
-        <section class="section intro-section">
-
-            <div class="container">
-
-                <div class="section-heading reveal">
-
-                    <span class="section-label">
-                        ABOUT MY WORK
-                    </span>
-
-                    <h2 class="section-title">
-                        I like turning
-                        <span class="gradient-text">
-                            ideas into reality.
-                        </span>
-                    </h2>
-
-                    <p class="section-description">
-
-                        From designing responsive interfaces to
-                        analyzing datasets, I enjoy learning by
-                        building real things.
-
-                    </p>
-
-                </div>
-
-
-                <div class="intro-grid">
-
-                    <div class="intro-card reveal">
-
-                        <span class="intro-number">
-                            01
-                        </span>
-
-                        <h3>
-                            Build
-                        </h3>
-
-                        <p>
-                            Creating clean, responsive and
-                            user-friendly web experiences.
-                        </p>
-
-                    </div>
-
-
-                    <div class="intro-card reveal">
-
-                        <span class="intro-number">
-                            02
-                        </span>
-
-                        <h3>
-                            Analyze
-                        </h3>
-
-                        <p>
-                            Working with data to discover patterns,
-                            insights and useful information.
-                        </p>
-
-                    </div>
-
-
-                    <div class="intro-card reveal">
-
-                        <span class="intro-number">
-                            03
-                        </span>
-
-                        <h3>
-                            Learn
-                        </h3>
-
-                        <p>
-                            Continuously improving my skills through
-                            practical projects and experimentation.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             SKILLS PREVIEW
-             ===================================================== -->
-
-        <section class="section skills-preview">
-
-            <div class="container">
-
-                <div class="section-heading reveal">
-
-                    <span class="section-label">
-                        WHAT I WORK WITH
-                    </span>
-
-                    <h2 class="section-title">
-                        My technical
-                        <span class="gradient-text">
-                            toolkit.
-                        </span>
-                    </h2>
-
-                </div>
-
-
-                <div class="skills-grid">
-
-
-                    <article class="skill-card reveal">
-
-                        <div class="skill-card-icon">
-                            &lt;/&gt;
-                        </div>
-
-                        <span class="skill-card-number">
-                            01
-                        </span>
-
-                        <h3>
-                            Frontend
-                        </h3>
-
-                        <p>
-                            Building responsive and modern
-                            interfaces for the web.
-                        </p>
-
-                        <div class="skill-tags">
-
-                            <span>HTML</span>
-                            <span>CSS</span>
-                            <span>JavaScript</span>
-                            <span>Tailwind</span>
-
-                        </div>
-
-                    </article>
-
-
-                    <article class="skill-card reveal">
-
-                        <div class="skill-card-icon">
-                            Py
-                        </div>
-
-                        <span class="skill-card-number">
-                            02
-                        </span>
-
-                        <h3>
-                            Python
-                        </h3>
-
-                        <p>
-                            Using Python for automation,
-                            analysis and practical projects.
-                        </p>
-
-                        <div class="skill-tags">
-
-                            <span>Python</span>
-                            <span>NumPy</span>
-                            <span>Pandas</span>
-
-                        </div>
-
-                    </article>
-
-
-                    <article class="skill-card reveal">
-
-                        <div class="skill-card-icon">
-                            DS
-                        </div>
-
-                        <span class="skill-card-number">
-                            03
-                        </span>
-
-                        <h3>
-                            Data Science
-                        </h3>
-
-                        <p>
-                            Exploring datasets and creating
-                            meaningful visualizations.
-                        </p>
-
-                        <div class="skill-tags">
-
-                            <span>Matplotlib</span>
-                            <span>Seaborn</span>
-                            <span>Pandas</span>
-
-                        </div>
-
-                    </article>
-
-
-                    <article class="skill-card reveal">
-
-                        <div class="skill-card-icon">
-                            DB
-                        </div>
-
-                        <span class="skill-card-number">
-                            04
-                        </span>
-
-                        <h3>
-                            Database & Tools
-                        </h3>
-
-                        <p>
-                            Managing projects, repositories
-                            and application data.
-                        </p>
-
-                        <div class="skill-tags">
-
-                            <span>MongoDB</span>
-                            <span>Git</span>
-                            <span>GitHub</span>
-
-                        </div>
-
-                    </article>
-
-                </div>
-
-
-                <div class="section-action reveal">
-
-                    <a
-                        href="skills.html"
-                        class="btn btn-secondary"
-                    >
-                        Explore All Skills
-                        <span>→</span>
-                    </a>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             FEATURED PROJECTS
-             ===================================================== -->
-
-        <section class="section projects-preview">
-
-            <div class="container">
-
-                <div class="section-heading reveal">
-
-                    <span class="section-label">
-                        FEATURED WORK
-                    </span>
-
-                    <h2 class="section-title">
-                        Things I've
-                        <span class="gradient-text">
-                            built.
-                        </span>
-                    </h2>
-
-                    <p class="section-description">
-
-                        A selection of projects where I've
-                        experimented, learned and solved
-                        practical problems.
-
-                    </p>
-
-                </div>
-
-
-                <div class="projects-grid">
-
-
-                    <!-- Project 1 -->
-
-                    <article class="project-card reveal">
-
-                        <div class="project-image project-data">
-
-                            <div class="project-visual-content">
-
-                                <span>
-                                    DATA
-                                </span>
-
-                                <strong>
-                                    Gold Price
-                                    Analysis
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="project-content">
-
-                            <span class="project-category">
-                                Data Science
-                            </span>
-
-                            <h3>
-                                Gold Price Analysis
-                            </h3>
-
-                            <p>
-                                An exploratory data analysis project
-                                focused on historical gold prices,
-                                trends, returns and volatility.
-                            </p>
-
-                            <a
-                                href="projects.html"
-                                class="project-link"
-                            >
-                                View Project →
-                            </a>
-
-                        </div>
-
-                    </article>
-
-
-
-                    <!-- Project 2 -->
-
-                    <article class="project-card reveal">
-
-                        <div class="project-image project-web">
-
-                            <div class="project-visual-content">
-
-                                <span>
-                                    WEB
-                                </span>
-
-                                <strong>
-                                    Modern Web
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="project-content">
-
-                            <span class="project-category">
-                                Web Development
-                            </span>
-
-                            <h3>
-                                Modern Web Experience
-                            </h3>
-
-                            <p>
-                                A responsive website focused on
-                                modern UI design, clean layouts
-                                and smooth interactions.
-                            </p>
-
-                            <a
-                                href="projects.html"
-                                class="project-link"
-                            >
-                                View Project →
-                            </a>
-
-                        </div>
-
-                    </article>
-
-                </div>
-
-
-                <div class="section-action reveal">
-
-                    <a
-                        href="projects.html"
-                        class="btn btn-primary"
-                    >
-                        View All Projects
-                        <span>→</span>
-                    </a>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             CTA
-             ===================================================== -->
-
-        <section class="section cta-section">
-
-            <div class="container">
-
-                <div class="cta-container reveal">
-
-                    <div class="cta-content">
-
-                        <span class="section-label">
-                            HAVE AN IDEA?
-                        </span>
-
-                        <h2>
-                            Let's build something
-                            <span>
-                                meaningful.
-                            </span>
-                        </h2>
-
-                        <p>
-                            Whether it's a website, data project,
-                            or something completely new, I'm always
-                            interested in building and learning.
-                        </p>
-
-
-                        <div class="cta-buttons">
-
-                            <a
-                                href="contact.html"
-                                class="btn btn-primary"
-                            >
-                                Start a Conversation
-                                <span>→</span>
-                            </a>
-
-                            <a
-                                href="about.html"
-                                class="btn btn-secondary"
-                            >
-                                More About Me
-                            </a>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="cta-decoration">
-
-                        <span></span>
-                        <span></span>
-                        <span></span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-
-    <!-- =====================================================
-         FOOTER
-         ===================================================== -->
-
-    <footer class="footer">
-
-        <div class="container footer-content">
-
-            <div>
-
-                <a href="index.html" class="logo">
-                    Inshal<span>.</span>
-                </a>
-
-                <p>
-                    Developer & Data Science Enthusiast
-                </p>
-
-            </div>
-
-
-            <div class="footer-socials">
-
-                <a href="#" target="_blank">
-                    GitHub
-                </a>
-
-                <a href="#" target="_blank">
-                    LinkedIn
-                </a>
-
-                <a href="#" target="_blank">
-                    Instagram
-                </a>
-
-            </div>
-
-
-            <p class="footer-copy">
-
-                © <span data-year></span>
-                Inshal Mudassir.
-                All rights reserved.
-
-            </p>
-
+  <!-- Background blobs -->
+  <div class="blob blob-blue top-[-60px] left-[-80px]"></div>
+  <div class="blob blob-lavender bottom-[10%] right-[-40px]"></div>
+  <div class="blob blob-cyan top-[40%] left-[70%]"></div>
+
+  <!-- Navbar -->
+  <nav id="navbar" class="navbar fixed top-4 left-4 right-4 z-50 rounded-full px-6 py-3 mx-auto max-w-6xl transition-all duration-300">
+    <div class="flex items-center justify-between">
+      <a href="#" class="text-2xl font-bold tracking-tight text-charcoal">Inshal.</a>
+      <div class="hidden md:flex items-center gap-6 text-sm font-medium">
+        <a href="#home" class="nav-link active">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#tools" class="nav-link">Tools</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#education" class="nav-link">Education</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+      <button id="menu-toggle" class="md:hidden text-2xl focus:outline-none"><i class="fas fa-bars"></i></button>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="mobile-menu md:hidden mt-4 space-y-2 pb-2 hidden">
+      <a href="#home" class="block nav-link">Home</a>
+      <a href="#about" class="block nav-link">About</a>
+      <a href="#skills" class="block nav-link">Skills</a>
+      <a href="#tools" class="block nav-link">Tools</a>
+      <a href="#projects" class="block nav-link">Projects</a>
+      <a href="#education" class="block nav-link">Education</a>
+      <a href="#contact" class="block nav-link">Contact</a>
+    </div>
+  </nav>
+
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 pt-28 pb-12 space-y-28">
+    <!-- Hero -->
+    <section id="home" class="relative pt-4">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6">
+          <h1 class="hero-heading text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">Hi, I'm <span class="text-gradient">Inshal Mudassir</span></h1>
+          <p class="text-xl text-slate-600 font-medium">Computer Science Student · Web Developer · Data Science &amp; ML Enthusiast</p>
+          <p class="text-slate-500 max-w-md">I build modern web experiences and explore data, machine learning, and intelligent solutions using Python and modern technologies.</p>
+          <div class="flex flex-wrap gap-4 pt-2">
+            <a href="#projects" class="btn-primary"><i class="fas fa-code mr-2"></i>Explore My Work</a>
+            <a href="#contact" class="btn-outline"><i class="fas fa-paper-plane mr-2"></i>Let's Connect</a>
+          </div>
+          <div class="flex gap-5 text-2xl text-slate-500 pt-2">
+            <a href="#" aria-label="GitHub"><i class="fab fa-github hover:text-blue-600 transition"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in hover:text-blue-600 transition"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram hover:text-pink-500 transition"></i></a>
+            <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp hover:text-green-500 transition"></i></a>
+          </div>
         </div>
+        <div class="relative flex justify-center">
+          <div class="glass-card rounded-3xl p-6 w-full max-w-sm relative z-10">
+            <div class="grid grid-cols-2 gap-3 text-sm">
+              <div class="bg-white/70 p-3 rounded-xl shadow-sm border"><i class="fab fa-html5 text-orange-500 mr-1"></i> HTML5</div>
+              <div class="bg-white/70 p-3 rounded-xl shadow-sm border"><i class="fab fa-css3-alt text-blue-500 mr-1"></i> CSS3</div>
+              <div class="bg-white/70 p-3 rounded-xl shadow-sm border"><i class="fab fa-js text-yellow-500 mr-1"></i> JS</div>
+              <div class="bg-white/70 p-3 rounded-xl shadow-sm border"><i class="fab fa-python text-blue-400 mr-1"></i> Python</div>
+              <div class="bg-white/70 p-3 rounded-xl shadow-sm border col-span-2"><i class="fas fa-database text-cyan-500 mr-1"></i> Pandas · NumPy</div>
+              <div class="bg-white/70 p-3 rounded-xl shadow-sm border col-span-2"><i class="fas fa-microchip text-lavender-500 mr-1"></i> Scikit-learn · ML</div>
+            </div>
+            <div class="mt-3 p-2 bg-white/60 rounded-xl border flex items-center gap-2 text-xs"><i class="fas fa-terminal text-blue-500"></i> <span class="font-mono">$ whoami → Inshal</span></div>
+          </div>
+          <!-- floating decorations -->
+          <div class="absolute -top-6 -right-6 w-20 h-20 bg-cyan-200/40 rounded-full blur-2xl"></div>
+          <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-lavender-200/40 rounded-full blur-2xl"></div>
+        </div>
+      </div>
+    </section>
 
-    </footer>
+    <!-- About -->
+    <section id="about" class="reveal">
+      <div class="grid md:grid-cols-5 gap-10 items-center">
+        <div class="md:col-span-3 space-y-4">
+          <h2 class="text-3xl font-bold">About Me</h2>
+          <p class="text-slate-600">Computer Science student with a passion for Web Development, Python, Data Science, and Machine Learning. I enjoy building intelligent systems, analyzing data, and crafting modern digital experiences.</p>
+          <div class="grid grid-cols-2 gap-4 pt-2">
+            <div class="bg-white/70 p-4 rounded-2xl shadow-sm border"><span class="font-semibold">🎓 Education</span><br><span class="text-sm text-slate-500">BS Computer Science</span></div>
+            <div class="bg-white/70 p-4 rounded-2xl shadow-sm border"><span class="font-semibold">📅 Journey</span><br><span class="text-sm text-slate-500">2023 — 2027</span></div>
+            <div class="bg-white/70 p-4 rounded-2xl shadow-sm border"><span class="font-semibold">🎯 Focus</span><br><span class="text-sm text-slate-500">Web + Data Science</span></div>
+            <div class="bg-white/70 p-4 rounded-2xl shadow-sm border"><span class="font-semibold">💻 Environment</span><br><span class="text-sm text-slate-500">Linux + VS Code</span></div>
+          </div>
+        </div>
+        <div class="md:col-span-2 flex flex-wrap gap-3 justify-center">
+          <span class="bg-white/70 px-5 py-2 rounded-full shadow-sm border text-sm"><i class="fab fa-python text-blue-400"></i> Python</span>
+          <span class="bg-white/70 px-5 py-2 rounded-full shadow-sm border text-sm"><i class="fas fa-code text-blue-500"></i> Web Dev</span>
+          <span class="bg-white/70 px-5 py-2 rounded-full shadow-sm border text-sm"><i class="fas fa-chart-line text-cyan-500"></i> Data Analysis</span>
+          <span class="bg-white/70 px-5 py-2 rounded-full shadow-sm border text-sm"><i class="fas fa-brain text-lavender-500"></i> ML</span>
+          <span class="bg-white/70 px-5 py-2 rounded-full shadow-sm border text-sm"><i class="fas fa-database text-cyan-600"></i> MongoDB</span>
+          <span class="bg-white/70 px-5 py-2 rounded-full shadow-sm border text-sm"><i class="fab fa-linux text-slate-500"></i> Linux</span>
+        </div>
+      </div>
+    </section>
 
+    <!-- Skills -->
+    <section id="skills" class="reveal">
+      <h2 class="text-3xl font-bold mb-8">Skills &amp; Expertise</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="skill-card p-6 bg-white/80"><i class="fas fa-code text-2xl text-blue-500"></i><h3 class="text-xl font-semibold mt-2">Web Development</h3><p class="text-sm text-slate-500">HTML5, CSS3, JavaScript, Tailwind, responsive design</p></div>
+        <div class="skill-card p-6 bg-white/80"><i class="fab fa-python text-2xl text-blue-400"></i><h3 class="text-xl font-semibold mt-2">Programming</h3><p class="text-sm text-slate-500">Python, scripting, automation</p></div>
+        <div class="skill-card p-6 bg-white/80"><i class="fas fa-chart-bar text-2xl text-cyan-500"></i><h3 class="text-xl font-semibold mt-2">Data Science</h3><p class="text-sm text-slate-500">NumPy, Pandas, Matplotlib, Seaborn</p></div>
+        <div class="skill-card p-6 bg-white/80"><i class="fas fa-brain text-2xl text-lavender-500"></i><h3 class="text-xl font-semibold mt-2">Machine Learning</h3><p class="text-sm text-slate-500">Scikit-learn, preprocessing, regression, classification</p></div>
+        <div class="skill-card p-6 bg-white/80"><i class="fas fa-database text-2xl text-cyan-600"></i><h3 class="text-xl font-semibold mt-2">Database</h3><p class="text-sm text-slate-500">MongoDB, data modeling</p></div>
+        <div class="skill-card p-6 bg-white/80"><i class="fas fa-tools text-2xl text-slate-500"></i><h3 class="text-xl font-semibold mt-2">Dev Tools</h3><p class="text-sm text-slate-500">Git, GitHub, VS Code, Linux, Jupyter</p></div>
+      </div>
+    </section>
 
-    <!-- =====================================================
-         JAVASCRIPT
-         ===================================================== -->
+    <!-- Tools -->
+    <section id="tools" class="reveal">
+      <h2 class="text-3xl font-bold mb-8">Tools I Work With</h2>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fab fa-html5 text-2xl text-orange-500"></i> HTML</span>
+        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fab fa-css3-alt text-2xl text-blue-500"></i> CSS</span>
+        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fab fa-js text-2xl text-yellow-500"></i> JavaScript</span>
+        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fab fa-tailwind text-2xl text-cyan-400"></i> Tailwind</span>
+        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fab fa-python text-2xl text-blue-400"></i> Python</span>
+        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fas fa-cube text-2xl text-cyan-500"></i> NumPy</span>
+        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fas fa-table text-2xl text-green-500"></i> Pandas</span>
+        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fas fa-chart-pie text-2xl text-purple-400"></i> Matplotlib</span>
+        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fas fa-chart-line text-2xl text-blue-300"></i> Seaborn</span>
+        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fas fa-robot text-2xl text-lavender-500"></i> Scikit-learn</span>
+        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fas fa-database text-2xl text-green-600"></i> MongoDB</span>
+        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fab fa-git-alt text-2xl text-orange-600"></i> Git</span>
+        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fab fa-github text-2xl text-slate-600"></i> GitHub</span>
+        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fas fa-code text-2xl text-blue-600"></i> VS Code</span>
+        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fab fa-linux text-2xl text-slate-500"></i> Linux</span>
+        <span class="tool-card px-5 py-3 bg-white/70 rounded-2xl shadow-sm border flex items-center gap-2"><i class="fas fa-book text-2xl text-amber-500"></i> Jupyter</span>
+      </div>
+    </section>
 
-    <script src="js/main.js"></script>
-    <script src="js/animations.js"></script>
+    <!-- What I do -->
+    <section class="reveal">
+      <h2 class="text-3xl font-bold mb-8">What I Do</h2>
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div class="what-card p-6 bg-white/80 border-l-4 border-blue-400"><i class="fas fa-laptop-code text-3xl text-blue-500"></i><h3 class="text-xl font-semibold mt-2">Web Development</h3><p class="text-sm text-slate-500">Responsive, modern websites with HTML, CSS, JS &amp; Tailwind.</p></div>
+        <div class="what-card p-6 bg-white/80 border-l-4 border-cyan-400"><i class="fas fa-chart-simple text-3xl text-cyan-500"></i><h3 class="text-xl font-semibold mt-2">Data Analysis</h3><p class="text-sm text-slate-500">Python, Pandas, NumPy, visualization for insights.</p></div>
+        <div class="what-card p-6 bg-white/80 border-l-4 border-lavender-400"><i class="fas fa-microchip text-3xl text-lavender-500"></i><h3 class="text-xl font-semibold mt-2">Machine Learning</h3><p class="text-sm text-slate-500">Regression, classification, preprocessing with Scikit-learn.</p></div>
+        <div class="what-card p-6 bg-white/80 border-l-4 border-emerald-400"><i class="fas fa-server text-3xl text-emerald-500"></i><h3 class="text-xl font-semibold mt-2">Database &amp; Dev</h3><p class="text-sm text-slate-500">MongoDB, Git, Linux, VS Code for robust development.</p></div>
+      </div>
+    </section>
 
-</body>
+    <!-- Projects (placeholder) -->
+    <section id="projects" class="reveal">
+      <h2 class="text-3xl font-bold mb-6">Featured Projects</h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="project-card p-6 bg-white/80"><div class="h-32 bg-soft-blue rounded-2xl flex items-center justify-center text-slate-400 border"><i class="fas fa-globe text-4xl opacity-40"></i></div><h3 class="text-xl font-semibold mt-4">Web Project</h3><p class="text-sm text-slate-500">Modern responsive site with Tailwind.</p><div class="flex gap-2 mt-3"><span class="text-xs bg-blue-50 px-3 py-1 rounded-full">HTML</span><span class="text-xs bg-blue-50 px-3 py-1 rounded-full">CSS</span></div><div class="flex gap-4 mt-4"><a href="#" class="text-blue-500 text-sm"><i class="fab fa-github"></i> Code</a><a href="#" class="text-blue-500 text-sm"><i class="fas fa-external-link-alt"></i> Demo</a></div></div>
+        <div class="project-card p-6 bg-white/80"><div class="h-32 bg-lavender-light rounded-2xl flex items-center justify-center text-slate-400 border"><i class="fas fa-chart-line text-4xl opacity-40"></i></div><h3 class="text-xl font-semibold mt-4">Data Analysis</h3><p class="text-sm text-slate-500">Exploratory data analysis with Pandas/Matplotlib.</p><div class="flex gap-2 mt-3"><span class="text-xs bg-blue-50 px-3 py-1 rounded-full">Python</span><span class="text-xs bg-blue-50 px-3 py-1 rounded-full">Pandas</span></div><div class="flex gap-4 mt-4"><a href="#" class="text-blue-500 text-sm"><i class="fab fa-github"></i> Code</a><a href="#" class="text-blue-500 text-sm"><i class="fas fa-external-link-alt"></i> Demo</a></div></div>
+      </div>
+    </section>
 
-</html>
+    <!-- Education -->
+    <section id="education" class="reveal">
+      <h2 class="text-3xl font-bold mb-6">Education</h2>
+      <div class="relative pl-8 border-l-2 border-blue-200 ml-4">
+        <div class="absolute -left-3 top-0 w-6 h-6 bg-gradient-to-r from-blue-400 to-lavender-400 rounded-full border-2 border-white shadow"></div>
+        <div class="bg-white/70 p-6 rounded-2xl shadow-sm border max-w-md"><h3 class="text-xl font-semibold">BS Computer Science</h3><p class="text-sm text-slate-500">2023 — 2027</p></div>
+      </div>
+    </section>
+
+    <!-- Learning Journey -->
+    <section class="reveal">
+      <h2 class="text-3xl font-bold mb-6">Currently Exploring</h2>
+      <div class="flex flex-wrap gap-3">
+        <span class="bg-white/70 px-5 py-2 rounded-full shadow-sm border">Machine Learning</span>
+        <span class="bg-white/70 px-5 py-2 rounded-full shadow-sm border">Data Science</span>
+        <span class="bg-white/70 px-5 py-2 rounded-full shadow-sm border">Advanced Python</span>
+        <span class="bg-white/70 px-5 py-2 rounded-full shadow-sm border">Data Visualization</span>
+        <span class="bg-white/70 px-5 py-2 rounded-full shadow-sm border">AI</span>
+        <span class="bg-white/70 px-5 py-2 rounded-full shadow-sm border">Modern Web</span>
+      </div>
+    </section>
+
+    <!-- Developer Terminal -->
+    <section class="reveal">
+      <div class="terminal-light p-6 max-w-2xl mx-auto">
+        <div class="flex items-center gap-2 text-sm text-slate-400"><i class="fas fa-circle text-red-400"></i><i class="fas fa-circle text-yellow-400"></i><i class="fas fa-circle text-green-400"></i><span class="ml-2 font-mono">terminal</span></div>
+        <div class="space-y-1 mt-2 font-mono text-sm">
+          <div class="terminal-line"><span class="terminal-prompt">$</span><span class="terminal-cmd"> whoami</span><span class="terminal-output">  Inshal</span></div>
+          <div class="terminal-line"><span class="terminal-prompt">$</span><span class="terminal-cmd"> skills</span><span class="terminal-output">  HTML CSS JavaScript Python</span></div>
+          <div class="terminal-line"><span class="terminal-prompt">$</span><span class="terminal-cmd"> data</span><span class="terminal-output">  NumPy Pandas Matplotlib</span></div>
+          <div class="terminal-line"><span class="terminal-prompt">$</span><span class="terminal-cmd"> focus</span><span class="terminal-output">  Web Development + Data Science + ML</span></div>
+          <div class="terminal-line"><span class="terminal-prompt">$</span><span class="terminal-cmd"> status</span><span class="terminal-output typing-cursor">  Always Learning...</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social CTA -->
+    <section class="reveal">
+      <div class="bg-soft-blue/50 rounded-3xl p-8 text-center">
+        <h2 class="text-3xl font-bold">Let's Build Something Together</h2>
+        <p class="text-slate-600 max-w-xl mx-auto mt-2">Have an idea, project, or opportunity? Let's connect and create something useful.</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 max-w-3xl mx-auto">
+          <a href="#" class="connect-card p-4 bg-white/70 rounded-2xl shadow-sm border flex flex-col items-center"><i class="fab fa-github text-3xl text-slate-600"></i><span class="font-medium">GitHub</span><span class="text-xs text-slate-400">code</span></a>
+          <a href="#" class="connect-card p-4 bg-white/70 rounded-2xl shadow-sm border flex flex-col items-center"><i class="fab fa-linkedin-in text-3xl text-blue-600"></i><span class="font-medium">LinkedIn</span><span class="text-xs text-slate-400">connect</span></a>
+          <a href="#" class="connect-card p-4 bg-white/70 rounded-2xl shadow-sm border flex flex-col items-center"><i class="fab fa-instagram text-3xl text-pink-500"></i><span class="font-medium">Instagram</span><span class="text-xs text-slate-400">follow</span></a>
+          <a href="#" class="connect-card p-4 bg-white/70 rounded-2xl shadow-sm border flex flex-col items-center"><i class="fab fa-whatsapp text-3xl text-green-500"></i><span class="font-medium">WhatsApp</span><span class="text-xs text-slate-400">chat</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="reveal grid md:grid-cols-2 gap-8">
+      <div><h2 class="text-3xl font-bold">Get In Touch</h2><form class="mt-4 space-y-4"><input class="w-full p-3 rounded-xl border bg-white/70" placeholder="Name" /><input class="w-full p-3 rounded-xl border bg-white/70" placeholder="Email" /><input class="w-full p-3 rounded-xl border bg-white/70" placeholder="Subject" /><textarea class="w-full p-3 rounded-xl border bg-white/70" rows="4" placeholder="Message"></textarea><button class="btn-primary"><i class="fas fa-paper-plane mr-2"></i>Send Message →</button></form></div>
+      <div class="flex items-center justify-center"><div class="w-full h-48 bg-soft-blue/40 rounded-3xl flex items-center justify-center text-slate-400 border"><i class="fas fa-envelope-open-text text-6xl opacity-40"></i></div></div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white/80 border-t mt-12 py-10 text-center text-slate-500">
+    <p class="text-2xl font-bold text-charcoal">Inshal.</p>
+    <p class="text-sm">Building · Learning · Creating</p>
+    <div class="flex justify-center gap-5 text-xl my-3"><a href
